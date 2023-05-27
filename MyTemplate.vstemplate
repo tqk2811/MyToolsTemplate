@@ -1,0 +1,45 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>MyToolsTemplate</Name>
+    <Description>
+    </Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>MyToolsTemplate</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="MyToolsTemplate.csproj" File="MyToolsTemplate.csproj" ReplaceParameters="true">
+      <Folder Name="Attributes" TargetFolderName="Attributes">
+        <ProjectItem ReplaceParameters="true" TargetFileName="NameAttribute.cs">NameAttribute.cs</ProjectItem>
+      </Folder>
+      <Folder Name="AppData" TargetFolderName="AppData" />
+      <Folder Name="DataClass" TargetFolderName="DataClass">
+        <ProjectItem ReplaceParameters="true" TargetFileName="SettingData.cs">SettingData.cs</ProjectItem>
+      </Folder>
+      <Folder Name="UI" TargetFolderName="UI">
+        <Folder Name="ViewModels" TargetFolderName="ViewModels">
+          <ProjectItem ReplaceParameters="true" TargetFileName="BaseVM.cs">BaseVM.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="EnumVM.cs">EnumVM.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="MainWVM.cs">MainWVM.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SettingWVM.cs">SettingWVM.cs</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml">MainWindow.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml.cs">MainWindow.xaml.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SettingWindow.xaml">SettingWindow.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SettingWindow.xaml.cs">SettingWindow.xaml.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Singleton.cs">Singleton.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Extensions.cs">Extensions.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFrameworks>net462</TargetFrameworks>
+		<LangVersion>10.0</LangVersion>
+		<UseWPF>true</UseWPF>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="AppData\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="SpicyTaco.AutoGrid" Version="1.2.29" />
+		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build2023031100" />
+	</ItemGroup>
+
+</Project>
