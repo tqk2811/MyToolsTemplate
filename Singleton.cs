@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 using TqkLibrary.WpfUi;
 
@@ -16,7 +17,7 @@ namespace $safeprojectname$
             Directory.CreateDirectory(LogDir);
             Setting = new SaveSettingData<SettingData>(SettingJson);
         }
-        internal static string ExeDir { get; } = Directory.GetCurrentDirectory();
+        internal static string ExeDir { get; } = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;//Directory.GetCurrentDirectory();
         internal static string LogDir { get; } = Path.Combine(ExeDir, "Logs");
         internal static string AppDataDir { get; } = Path.Combine(ExeDir, "AppData");
         internal static string SettingJson { get; } = Path.Combine(ExeDir, "Setting.json");
