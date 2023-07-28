@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TqkLibrary.WpfUi;
 using TqkLibrary.WpfUi.ObservableCollection;
-namespace $safeprojectname$.UI.ViewModels
+namespace $safeprojectname$.UI.ViewModels.WindowViewModels
 {
     class MainWVM : BaseVM
     {

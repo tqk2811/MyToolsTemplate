@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TqkLibrary.WpfUi;
 using TqkLibrary.WpfUi.ObservableCollection;
 using $safeprojectname$.DataClass;
-namespace $safeprojectname$.UI.ViewModels
+namespace $safeprojectname$.UI.ViewModels.WindowViewModels
 {
     class SettingWVM : BaseVM
     {

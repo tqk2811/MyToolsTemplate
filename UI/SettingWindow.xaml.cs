@@ -20,11 +20,13 @@ namespace $safeprojectname$.UI
     /// </summary>
     public partial class SettingWindow : Window
     {
-		readonly SettingWVM settingWVM;
+		readonly SettingWVM _settingWVM;
         public SettingWindow()
         {
-            InitializeComponent();
-			this.settingWVM = this.DataContext as SettingWVM;
+            InitializeComponent();            
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            if (mainWindow is not null) this.Owner = mainWindow;
+			this._settingWVM = this.DataContext as SettingWVM;
         }
     }
 }

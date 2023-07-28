@@ -21,16 +21,11 @@ namespace $safeprojectname$.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-		readonly MainWVM mainWVM;
+		readonly MainWVM _mainWVM;
         public MainWindow()
         {
-			if (System.IO.Directory.GetCurrentDirectory().StartsWith(System.IO.Path.GetTempPath()))
-            {
-                MessageBox.Show("Hãy giải nén ra để chạy", "Thông báo");
-                Environment.Exit(-1);
-            }
             InitializeComponent();
-			this.mainWVM = this.DataContext as MainWVM;
+			this._mainWVM = this.DataContext as MainWVM;
         }
     }
 }

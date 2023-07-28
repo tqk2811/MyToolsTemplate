@@ -17,7 +17,8 @@
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="SpicyTaco.AutoGrid" Version="1.2.29" />
-		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build2023031100" />
+		<PackageReference Include="TqkLibrary.Linq" Version="1.0.0-build20230728165743" />
+		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20230728174404" />
 	</ItemGroup>
 
 </Project>

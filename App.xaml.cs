@@ -13,5 +13,13 @@ namespace $safeprojectname$
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            if (System.IO.Directory.GetCurrentDirectory().StartsWith(System.IO.Path.GetTempPath()))
+            {
+                MessageBox.Show("Hãy giải nén ra để chạy", "Thông báo");
+                Environment.Exit(-1);
+            }
+        }
     }
 }

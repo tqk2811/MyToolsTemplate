@@ -1,55 +1,91 @@
 ﻿using $safeprojectname$.Attributes;
 using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Windows.Media;
 using TqkLibrary.WpfUi;
+using TqkLibrary.WpfUi.ObservableCollection;
 
 namespace $safeprojectname$.UI.ViewModels
 {
-    internal class EnumVM<T> where T : Enum
+    internal class EnumVM<TEnum> where TEnum : Enum
     {
-        public EnumVM(T t)
+        public EnumVM(TEnum t)
         {
             this.Value = t;
             this.Name = t.GetAttribute<NameAttribute>()?.Name ?? t.ToString();
             Childs.CollectionChanged += Childs_CollectionChanged;
         }
-        public EnumVM(T t, IEnumerable<EnumVM<T>> childs) : this(t)
+        public EnumVM(TEnum t, IEnumerable<EnumVM<TEnum>> childs) : this(t)
         {
-            foreach(var item in childs) this.Childs.Add(item);
+            foreach (var item in childs) this.Childs.Add(item);
         }
 
         private void Childs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.NewItems is not null)
+            switch(e.Action)
             {
-                foreach (var item in e.NewItems.Cast<EnumVM<T>>())
-                {
-                    if (item.Parent is not null)
-                        throw new InvalidOperationException();
+                case NotifyCollectionChangedAction.Add:
+                    if (e.NewItems is not null)
+                    {
+                        foreach (var item in e.NewItems.Cast<EnumVM<TEnum>>())
+                        {
+                            if (item.Parent is not null)
+                                throw new InvalidOperationException();
 
-                    item.Parent = this;
-                }
-            }
-            if (e.OldItems is not null)
-            {
-                foreach (var item in e.OldItems.Cast<EnumVM<T>>())
-                {
-                    if (item.Parent is null)
-                        throw new InvalidOperationException();
+                            item.Parent = this;
+                        }
+                    }
+                    break;
 
-                    item.Parent = null;
-                }
+                case NotifyCollectionChangedAction.Reset:
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems is not null)
+                    {
+                        foreach (var item in e.OldItems.Cast<EnumVM<TEnum>>())
+                        {
+                            if (item.Parent is null)
+                                throw new InvalidOperationException();
+
+                            item.Parent = null;
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    if (e.NewItems is not null)
+                    {
+                        foreach (var item in e.NewItems.Cast<EnumVM<TEnum>>())
+                        {
+                            if (item.Parent is not null)
+                                throw new InvalidOperationException();
+
+                            item.Parent = this;
+                        }
+                    }
+                    if (e.OldItems is not null)
+                    {
+                        foreach (var item in e.OldItems.Cast<EnumVM<TEnum>>())
+                        {
+                            if (item.Parent is null)
+                                throw new InvalidOperationException();
+
+                            item.Parent = null;
+                        }
+                    }
+                    break;
             }
         }
 
 
         public string Name { get; }
 
-        public T Value { get; }
+        public TEnum Value { get; }
 
         public ImageSource Image { get; }
 
-        public EnumVM<T> Parent { get; private set; }
+        public EnumVM<TEnum> Parent { get; private set; }
 
-        public ObservableCollection<EnumVM<T>> Childs { get; } = new ObservableCollection<EnumVM<T>>();
+        public DispatcherObservableCollection<EnumVM<TEnum>> Childs { get; } = new DispatcherObservableCollection<EnumVM<TEnum>>();
     }
 }

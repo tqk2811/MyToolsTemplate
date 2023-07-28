@@ -1,1 +1,1 @@
-# MyToolsTemplate
+# $safeprojectname$

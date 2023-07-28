@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:$safeprojectname$.UI"
         xmlns:ViewModels="clr-namespace:$safeprojectname$.UI.ViewModels"
+        xmlns:Commands="clr-namespace:$safeprojectname$.UI.ViewModels.Commands"
+        xmlns:WindowViewModels="clr-namespace:$safeprojectname$.UI.ViewModels.WindowViewModels"
         xmlns:Xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:WpfUiControl="clr-namespace:TqkLibrary.WpfUi.UserControls;assembly=TqkLibrary.WpfUi"
         xmlns:WpfUiConveter="clr-namespace:TqkLibrary.WpfUi.Converters;assembly=TqkLibrary.WpfUi"
@@ -12,7 +14,7 @@
         mc:Ignorable="d"
         Title="$safeprojectname$" WindowStartupLocation="CenterScreen" Height="450" Width="800">
     <Window.DataContext>
-        <ViewModels:MainWVM/>
+        <WindowViewModels:MainWVM/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
