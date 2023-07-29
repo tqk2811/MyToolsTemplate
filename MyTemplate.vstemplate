@@ -25,6 +25,7 @@
       <Folder Name="AppData" TargetFolderName="AppData" />
       <Folder Name="DataClass" TargetFolderName="DataClass">
         <ProjectItem ReplaceParameters="true" TargetFileName="SettingData.cs">SettingData.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="UiSettingData.cs">UiSettingData.cs</ProjectItem>
       </Folder>
       <Folder Name="Enums" TargetFolderName="Enums" />
       <Folder Name="Helpers" TargetFolderName="Helpers" />
@@ -51,7 +52,6 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Singleton.cs">Singleton.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Extensions.cs">Extensions.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="README.md">README.md</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

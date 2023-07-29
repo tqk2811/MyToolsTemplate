@@ -11,6 +11,9 @@
 
 	<ItemGroup>
 		<Folder Include="AppData\" />
+		<Folder Include="Enums\" />
+		<Folder Include="Helpers\" />
+		<Folder Include="Works\" />
 	</ItemGroup>
 
 	<ItemGroup>
