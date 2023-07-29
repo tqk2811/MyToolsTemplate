@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using $safeprojectname$.UI.ViewModels;
+using $safeprojectname$.UI.ViewModels.WindowViewModels;
 
 namespace $safeprojectname$.UI
 {
