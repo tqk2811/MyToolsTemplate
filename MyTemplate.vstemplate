@@ -31,10 +31,10 @@
       <Folder Name="Helpers" TargetFolderName="Helpers" />
       <Folder Name="UI" TargetFolderName="UI">
         <Folder Name="ViewModels" TargetFolderName="ViewModels">
-          <Folder Name="Commands" TargetFolderName="ViewModels">
+          <Folder Name="Commands" TargetFolderName="Commands">
             <ProjectItem ReplaceParameters="true" TargetFileName="BaseCommand.cs">BaseCommand.cs</ProjectItem>
           </Folder>
-          <Folder Name="WindowViewModels" TargetFolderName="ViewModels">
+          <Folder Name="WindowViewModels" TargetFolderName="WindowViewModels">
             <ProjectItem ReplaceParameters="true" TargetFileName="MainWVM.cs">MainWVM.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="SettingWVM.cs">SettingWVM.cs</ProjectItem>
           </Folder>
