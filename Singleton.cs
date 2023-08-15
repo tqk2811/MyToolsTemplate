@@ -10,7 +10,7 @@ using TqkLibrary.WpfUi;
 
 namespace $safeprojectname$
 {
-    static class Singleton
+    static partial class Singleton
     {
         static Singleton()
         {
