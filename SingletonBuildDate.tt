@@ -1,0 +1,12 @@
+<#@ template debug="true" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ output extension=".g.cs" #>
+using System;
+namespace $safeprojectname$
+{
+    internal static partial class Singleton
+    {
+        public static DateTime BuildDate => new DateTime(<# Write(DateTime.Now.Ticks.ToString()); #>L, DateTimeKind.Utc);
+    }
+}

@@ -9,8 +9,7 @@ namespace $safeprojectname$.UI.ViewModels.WindowViewModels
 {
     class MainWVM : BaseVM
     {
-
-
+        public string WindowTitle => $"$safeprojectname$ - build {Singleton.BuildDate:HH:mm:ss dd/MM/yyyy}";
 
 
         public LimitObservableCollection<string> Logs { get{ return _Logs; } } 
