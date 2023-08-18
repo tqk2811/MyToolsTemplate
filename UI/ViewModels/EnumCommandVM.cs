@@ -10,6 +10,10 @@ namespace $safeprojectname$.UI.ViewModels
         {
             this.Command = command ?? throw new ArgumentNullException(nameof(command));
         }
+        public EnumCommandVM(TEnum t, Action action) : base(t)
+        {
+            this.Command = new BaseCommand(action ?? throw new ArgumentNullException(nameof(action)));
+        }
 
         public ICommand Command { get; }
     }
