@@ -14,6 +14,10 @@ namespace $safeprojectname$.UI.ViewModels
         {
             this.Command = new BaseCommand(action ?? throw new ArgumentNullException(nameof(action)));
         }
+        public EnumCommandVM(TEnum t, IEnumerable<EnumCommandVM<TEnum>> childs) : base(t, childs)
+        {
+
+        }
 
         public ICommand Command { get; }
     }
@@ -24,6 +28,14 @@ namespace $safeprojectname$.UI.ViewModels
 
         }
         public EnumCommandVM(TEnum t, Action<TParam> commandExecute, Func<TParam, bool> canExecute) : base(t, new BaseCommand<TParam>(commandExecute, canExecute))
+        {
+
+        }
+        public EnumCommandVM(TEnum t, IEnumerable<EnumCommandVM<TEnum>> childs) : base(t, childs)
+        {
+
+        }
+        public EnumCommandVM(TEnum t, IEnumerable<EnumCommandVM<TEnum, TParam>> childs) : base(t, childs)
         {
 
         }
