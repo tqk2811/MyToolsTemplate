@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Input;
+using System.Collections.Generic;
 using $safeprojectname$.UI.ViewModels.Commands;
 
 namespace $safeprojectname$.UI.ViewModels
