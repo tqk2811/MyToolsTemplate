@@ -32,4 +32,20 @@
 		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20230728174404" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+		<None Update="SingletonBuildDate.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<LastGenOutput>SingletonBuildDate.g.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<Compile Update="SingletonBuildDate.g.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>SingletonBuildDate.tt</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
 </Project>
