@@ -10,4 +10,5 @@ namespace $safeprojectname$.Attributes
             Name = name;
         }
     }
+
 }

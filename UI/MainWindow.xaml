@@ -41,6 +41,30 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <ContextMenu.Resources>
+                        <ControlTemplate x:Key="MenuSeparatorTemplate">
+                            <Separator  IsEnabled="False" />
+                        </ControlTemplate>
+                        <Image x:Key="imgCTX" x:Shared="false" Source="{Binding Path=Image}"/>
+                    </ContextMenu.Resources>
+                    <ContextMenu.ItemContainerStyle>
+                        <Style TargetType="{x:Type MenuItem}">
+                            <Setter Property="Header" Value="{Binding Name}" />
+                            <Setter Property="Command" Value="{Binding Command}"/>
+                            <Setter Property="Icon" Value="{StaticResource imgCTX}"/>
+                            <Setter Property="ItemsSource" Value="{Binding Childs}"/>
+                            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type ListView}},Path=SelectedItems}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ''}" Value="{x:Null}">
+                                    <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContextMenu.ItemContainerStyle>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="22"/>

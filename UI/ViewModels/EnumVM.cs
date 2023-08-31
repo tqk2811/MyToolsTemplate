@@ -15,6 +15,7 @@ namespace $safeprojectname$.UI.ViewModels
         {
             this.Value = t;
             this.Name = t.GetAttribute<NameAttribute>()?.Name ?? t.ToString();
+            this.Image = t.GetAttribute<ImageAttribute>()?.GetImage();
             Childs.CollectionChanged += Childs_CollectionChanged;
         }
         public EnumVM(TEnum t, IEnumerable<EnumVM<TEnum>> childs) : this(t)
@@ -29,7 +30,7 @@ namespace $safeprojectname$.UI.ViewModels
                 case NotifyCollectionChangedAction.Add:
                     if (e.NewItems is not null)
                     {
-                        foreach (var item in e.NewItems.Cast<EnumVM<TEnum>>())
+                        foreach (var item in e.NewItems.Cast<EnumVM<TEnum>>().Where(x => x is not null))
                         {
                             if (item.Parent is not null)
                                 throw new InvalidOperationException();
@@ -43,7 +44,7 @@ namespace $safeprojectname$.UI.ViewModels
                 case NotifyCollectionChangedAction.Remove:
                     if (e.OldItems is not null)
                     {
-                        foreach (var item in e.OldItems.Cast<EnumVM<TEnum>>())
+                        foreach (var item in e.OldItems.Cast<EnumVM<TEnum>>().Where(x => x is not null))
                         {
                             if (item.Parent is null)
                                 throw new InvalidOperationException();
@@ -55,7 +56,7 @@ namespace $safeprojectname$.UI.ViewModels
                 case NotifyCollectionChangedAction.Replace:
                     if (e.NewItems is not null)
                     {
-                        foreach (var item in e.NewItems.Cast<EnumVM<TEnum>>())
+                        foreach (var item in e.NewItems.Cast<EnumVM<TEnum>>().Where(x => x is not null))
                         {
                             if (item.Parent is not null)
                                 throw new InvalidOperationException();
@@ -65,7 +66,7 @@ namespace $safeprojectname$.UI.ViewModels
                     }
                     if (e.OldItems is not null)
                     {
-                        foreach (var item in e.OldItems.Cast<EnumVM<TEnum>>())
+                        foreach (var item in e.OldItems.Cast<EnumVM<TEnum>>().Where(x => x is not null))
                         {
                             if (item.Parent is null)
                                 throw new InvalidOperationException();

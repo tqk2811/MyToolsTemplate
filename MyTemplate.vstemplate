@@ -21,6 +21,7 @@
       ReplaceParameters="true">
       <Folder Name="Attributes" TargetFolderName="Attributes">
         <ProjectItem ReplaceParameters="true" TargetFileName="NameAttribute.cs">NameAttribute.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ImageAttribute.cs">ImageAttribute.cs</ProjectItem>
       </Folder>
       <Folder Name="AppData" TargetFolderName="AppData" />
       <Folder Name="DataClass" TargetFolderName="DataClass">
@@ -53,6 +54,8 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Singleton.cs">Singleton.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="SingletonBuildDate.tt">SingletonBuildDate.tt</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Extensions.cs">Extensions.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Resource.Designer.cs">Resource.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Resource.resx">Resource.resx</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>
