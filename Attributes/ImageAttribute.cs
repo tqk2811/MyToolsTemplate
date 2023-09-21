@@ -1,4 +1,7 @@
 using System;
+using System.Drawing;
+using System.Windows.Media;
+using TqkLibrary.WpfUi;
 
 namespace $safeprojectname$.Attributes
 {
