@@ -23,7 +23,7 @@ namespace $safeprojectname$.UI.ViewModels
             foreach (var item in childs) this.Childs.Add(item);
         }
 
-        private void Childs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Childs_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             switch(e.Action)
             {
@@ -83,9 +83,9 @@ namespace $safeprojectname$.UI.ViewModels
 
         public TEnum Value { get; }
 
-        public ImageSource Image { get; }
+        public ImageSource? Image { get; }
 
-        public EnumVM<TEnum> Parent { get; private set; }
+        public EnumVM<TEnum>? Parent { get; private set; }
 
         public DispatcherObservableCollection<EnumVM<TEnum>> Childs { get; } = new DispatcherObservableCollection<EnumVM<TEnum>>();
     }
