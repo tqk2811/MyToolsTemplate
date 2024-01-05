@@ -15,8 +15,8 @@ namespace $safeprojectname$
         static Singleton()
         {
             Directory.CreateDirectory(LogDir);
-            Setting = new SaveSettingData<SettingData>(SettingJson);
-            UiSetting = new SaveSettingData<UiSettingData>(UiSettingJson);
+            Setting = new SaveJsonData<SettingData>(SettingJson);
+            UiSetting = new SaveJsonData<UiSettingData>(UiSettingJson);
         }
         internal static string ExeDir { get; } = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;//Directory.GetCurrentDirectory();
         internal static string LogDir { get; } = Path.Combine(ExeDir, "Logs");
@@ -25,7 +25,7 @@ namespace $safeprojectname$
         internal static string UiSettingJson { get; } = Path.Combine(ExeDir, "UiSetting.json");
 
 
-        internal static SaveSettingData<SettingData> Setting { get; }
-        internal static SaveSettingData<UiSettingData> UiSetting { get; }
+        internal static SaveJsonData<SettingData> Setting { get; }
+        internal static SaveJsonData<UiSettingData> UiSetting { get; }
     }
 }

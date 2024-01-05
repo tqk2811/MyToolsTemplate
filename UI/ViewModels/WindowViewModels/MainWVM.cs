@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TqkLibrary.WpfUi;
-using TqkLibrary.WpfUi.ObservableCollection;
+using TqkLibrary.WpfUi.ObservableCollections;
 using System.Runtime.CompilerServices;
 
 namespace $safeprojectname$.UI.ViewModels.WindowViewModels

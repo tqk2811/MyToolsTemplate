@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net462</TargetFrameworks>
-		<LangVersion>10.0</LangVersion>
+		<TargetFrameworks>net6.0-windows7.0</TargetFrameworks>
+		<LangVersion>12.0</LangVersion>
 		<UseWPF>true</UseWPF>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>
-		<TransformOnBuild>true</TransformOnBuild>
+		<TransformOnBuild Condition="$(Configuration) == 'Release'">true</TransformOnBuild>
 		<OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
 		<TransformOutOfDateOnly>false</TransformOutOfDateOnly>
 	</PropertyGroup>
@@ -23,13 +23,14 @@
 	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
+		<!-- <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		</PackageReference> -->
 		<PackageReference Include="SpicyTaco.AutoGrid" Version="1.2.29" />
-		<PackageReference Include="TqkLibrary.Linq" Version="1.0.0-build20230728165743" />
-		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20230728174404" />
+		<PackageReference Include="TqkLibrary.Linq" Version="1.0.0-build20231030102212" />
+		<!-- <PackageReference Include="TqkLibrary.Queues" Version="1.0.0-build20230814174501" /> -->
+		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20231206155222" />
 	</ItemGroup>
 
 

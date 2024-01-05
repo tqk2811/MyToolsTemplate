@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Media;
 using TqkLibrary.WpfUi;
-using TqkLibrary.WpfUi.ObservableCollection;
+using TqkLibrary.WpfUi.ObservableCollections;
 
 namespace $safeprojectname$.UI.ViewModels
 {
