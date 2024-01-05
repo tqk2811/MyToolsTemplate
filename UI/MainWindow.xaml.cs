@@ -23,10 +23,11 @@ namespace $safeprojectname$.UI
     public partial class MainWindow : Window
     {
 		readonly MainWVM _mainWVM;
+        readonly ILogger<MainWindow> _logger = Singleton.ILoggerFactory.CreateLogger<MainWindow>();
         public MainWindow()
         {
             InitializeComponent();
-			this._mainWVM = this.DataContext as MainWVM;
+			this._mainWVM = this.DataContext as MainWVM ?? throw new InvalidOperationException();
         }
     }
 }

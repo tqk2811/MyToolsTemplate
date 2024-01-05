@@ -22,12 +22,13 @@ namespace $safeprojectname$.UI
     public partial class SettingWindow : Window
     {
 		readonly SettingWVM _settingWVM;
+        readonly ILogger<MainWindow> _logger = Singleton.ILoggerFactory.CreateLogger<MainWindow>();
         public SettingWindow()
         {
             InitializeComponent();            
-            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            MainWindow? mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             if (mainWindow is not null) this.Owner = mainWindow;
-			this._settingWVM = this.DataContext as SettingWVM;
+			this._settingWVM = this.DataContext as SettingWVM ?? throw new InvalidOperationException();
         }
     }
 }

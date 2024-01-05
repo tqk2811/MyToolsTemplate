@@ -42,6 +42,7 @@
           <ProjectItem ReplaceParameters="true" TargetFileName="BaseVM.cs">BaseVM.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" TargetFileName="EnumVM.cs">EnumVM.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" TargetFileName="EnumCommandVM.cs">EnumCommandVM.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="MyLoggerProvider.cs">MyLoggerProvider.cs</ProjectItem>
         </Folder>
         <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml">MainWindow.xaml</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml.cs">MainWindow.xaml.cs</ProjectItem>
