@@ -19,20 +19,20 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             this._canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
         }
 
-        readonly Func<bool> _canExecute;
-        readonly Action _execute;
+        readonly Func<bool>? _canExecute;
+        readonly Action? _execute;
 
-        public virtual bool CanExecute(object parameter)
+        public virtual bool CanExecute(object? parameter)
         {
             return _canExecute?.Invoke() ?? true;
         }
 
-        public virtual void Execute(object parameter)
+        public virtual void Execute(object? parameter)
         {
             _execute?.Invoke();
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
         protected void FireCanExecuteChanged(object sender, EventArgs e)
         {
             CanExecuteChanged?.Invoke(sender, e);
@@ -52,14 +52,14 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         readonly Func<TParam, bool> _canExecute;
         readonly Action<TParam> _execute;
 
-        public override bool CanExecute(object parameter)
+        public override bool CanExecute(object? parameter)
         {
-            return _canExecute.Invoke((TParam)parameter);
+            return _canExecute.Invoke((TParam)parameter!);
         }
 
-        public override void Execute(object parameter)
+        public override void Execute(object? parameter)
         {
-            _execute?.Invoke((TParam)parameter);
+            _execute?.Invoke((TParam)parameter!);
         }
     }
 }

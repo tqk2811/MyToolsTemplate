@@ -20,7 +20,7 @@ namespace $safeprojectname$.UI.ViewModels
 
         }
 
-        public ICommand Command { get; }
+        public ICommand? Command { get; }
     }
     internal class EnumCommandVM<TEnum, TParam> : EnumCommandVM<TEnum> where TEnum : Enum
     {
