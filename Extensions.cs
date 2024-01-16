@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace $safeprojectname$
 {
@@ -27,7 +28,7 @@ namespace $safeprojectname$
                 scheduler: TaskScheduler.Default).Unwrap();
         }
 
-        
+
         public static void ShowMessageBox(this Exception ex)
         {
             MessageBox.Show($"{ex.Message}\r\n{ex.StackTrace}", ex.GetType().FullName);
