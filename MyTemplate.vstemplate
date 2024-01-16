@@ -21,7 +21,7 @@
       ReplaceParameters="true">
       <Folder Name="Attributes" TargetFolderName="Attributes">
         <ProjectItem ReplaceParameters="true" TargetFileName="NameAttribute.cs">NameAttribute.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="ImageAttribute.cs">ImageAttribute.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ImageResourceAttribute.cs">ImageResourceAttribute.cs</ProjectItem>
       </Folder>
       <Folder Name="AppData" TargetFolderName="AppData" />
       <Folder Name="DataClass" TargetFolderName="DataClass">

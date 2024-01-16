@@ -5,15 +5,15 @@ using TqkLibrary.WpfUi;
 
 namespace $safeprojectname$.Attributes
 {
-    internal class ImageAttribute : Attribute
+    internal class ImageResourceAttribute : Attribute
     {
         readonly string _resourceName;
-        public ImageAttribute(string resourceName)
+        public ImageResourceAttribute(string resourceName)
         {
             this._resourceName = resourceName;
         }
 
-        public ImageSource GetImage()
+        public ImageSource? GetImage()
         {
             if (string.IsNullOrWhiteSpace(_resourceName)) return null;
             var obj = Resource.ResourceManager.GetObject(this._resourceName);
