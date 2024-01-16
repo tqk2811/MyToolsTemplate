@@ -26,5 +26,11 @@ namespace $safeprojectname$
                 TaskContinuationOptions.ExecuteSynchronously,
                 scheduler: TaskScheduler.Default).Unwrap();
         }
+
+        
+        public static void ShowMessageBox(this Exception ex)
+        {
+            MessageBox.Show($"{ex.Message}\r\n{ex.StackTrace}", ex.GetType().FullName);
+        }
     }
 }
