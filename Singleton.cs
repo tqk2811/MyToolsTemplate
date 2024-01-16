@@ -32,7 +32,7 @@ namespace $safeprojectname$
         internal static string UiSettingJson { get; } = Path.Combine(ExeDir, "UiSetting.json");
 
         internal static JsonSerializerSettings JsonSerializerSettings { get; }
-        public static ILoggerFactory ILoggerFactory { get; set; }
+        internal static ILoggerFactory ILoggerFactory { get; set; }
         internal static SaveJsonData<SettingData> Setting { get; }
         internal static SaveJsonData<UiSettingData> UiSetting { get; }
     }
