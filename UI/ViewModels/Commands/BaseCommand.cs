@@ -1,22 +1,33 @@
 using System;
+using System.Windows.Threading;
 using System.Windows.Input;
+using TqkLibrary.WpfUi;
 
 namespace $safeprojectname$.UI.ViewModels.Commands
 {
     internal class BaseCommand : ICommand
     {
-        protected BaseCommand()
+        protected readonly Dispatcher _dispatcher;
+        protected BaseCommand() : this(App.Current.Dispatcher)
         {
 
+        }
+        protected BaseCommand(Dispatcher dispatcher)
+        {
+            this._dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
         }
 
         public BaseCommand(Action execute) : this(execute, () => true)
         {
         }
-        public BaseCommand(Action execute, Func<bool> canExecute)
+        public BaseCommand(Action execute, Func<bool> canExecute) : this(execute, canExecute, App.Current.Dispatcher)
+        {
+        }
+        public BaseCommand(Action execute, Func<bool> canExecute, Dispatcher dispatcher)
         {
             this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this._canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
+            this._dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
         }
 
         readonly Func<bool>? _canExecute;
@@ -33,10 +44,11 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         }
 
         public event EventHandler? CanExecuteChanged;
-        protected void FireCanExecuteChanged(object sender, EventArgs e)
+        public virtual void FireCanExecuteChanged(object? sender, EventArgs e)
         {
-            CanExecuteChanged?.Invoke(sender, e);
+            _dispatcher.TrueThreadInvokeAsync(() => CanExecuteChanged?.Invoke(sender, e));
         }
+        public virtual void FireCanExecuteChanged() => FireCanExecuteChanged(null, EventArgs.Empty);
     }
     internal class BaseCommand<TParam> : BaseCommand
     {
