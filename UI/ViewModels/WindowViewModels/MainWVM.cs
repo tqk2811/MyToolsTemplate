@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TqkLibrary.WpfUi;
 using TqkLibrary.WpfUi.ObservableCollections;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Logging;
 
 namespace $safeprojectname$.UI.ViewModels.WindowViewModels
 {
@@ -20,6 +21,6 @@ namespace $safeprojectname$.UI.ViewModels.WindowViewModels
 
         public LimitObservableCollection<string> Logs { get { return _Logs; } } 
         public static ILoggerProvider LoggerProvider { get { return _Logs; } }        
-		private static readonly MyLoggerProvider _Logs = new MyLoggerProvider();
+		private static readonly MyLoggerProviderVM _Logs = new MyLoggerProviderVM();
     }
 }

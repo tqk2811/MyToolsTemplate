@@ -8,6 +8,7 @@ using System.Text;
 using System.Reflection;
 using System.Threading.Tasks;
 using TqkLibrary.WpfUi;
+using Microsoft.Extensions.Logging;
 
 namespace $safeprojectname$
 {
