@@ -79,7 +79,7 @@
                     <GridViewColumn Header="Logs" Width="500">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" TextWrapping="NoWrap"/>
+                                <TextBlock Text="{Binding}" ToolTip="{Binding}" TextWrapping="NoWrap"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -87,7 +87,7 @@
             </ListView.View>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Height" Value="22"/>
+                    <Setter Property="MaxHeight" Value="60"/>
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                 </Style>
