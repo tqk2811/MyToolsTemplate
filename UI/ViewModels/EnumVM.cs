@@ -15,7 +15,7 @@ namespace $safeprojectname$.UI.ViewModels
         {
             this.Value = t;
             this.Name = t.GetAttribute<NameAttribute>()?.Name ?? t.ToString();
-            this.Image = t.GetAttribute<ImageAttribute>()?.GetImage();
+            this.Image = t.GetAttribute<ImageResourceAttribute>()?.GetImage();
             Childs.CollectionChanged += Childs_CollectionChanged;
         }
         public EnumVM(TEnum t, IEnumerable<EnumVM<TEnum>> childs) : this(t)
