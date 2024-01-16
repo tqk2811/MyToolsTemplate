@@ -47,7 +47,14 @@ namespace $safeprojectname$.UI.ViewModels
                     return;
                 }
 
-                _myLoggerProvider.Add($"[{logLevel,-12}] {_categoryName} - {formatter(state, exception)}");
+                if (exception is not null)
+                {
+                    _myLoggerProvider.AddAsync($"[{logLevel,-12}] {_categoryName} - {exception.GetType().FullName}: {exception.Message}\r\n{exception.StackTrace}");
+                }
+                else
+                {
+                    _myLoggerProvider.AddAsync($"[{logLevel,-12}] {_categoryName} - {formatter(state, exception)}");
+                }
             }
         }
     }
