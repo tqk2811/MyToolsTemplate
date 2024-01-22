@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Logging;
 
 namespace $safeprojectname$
 {
@@ -32,6 +34,10 @@ namespace $safeprojectname$
         public static void ShowMessageBox(this Exception ex)
         {
             MessageBox.Show($"{ex.Message}\r\n{ex.StackTrace}", ex.GetType().FullName);
+        }
+        public static void LogErrorFunction(this ILogger? logger, Exception ex, [CallerMemberName] string? functionName = "")
+        {
+            logger?.LogError(ex, functionName);
         }
     }
 }
