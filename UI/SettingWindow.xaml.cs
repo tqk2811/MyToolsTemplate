@@ -23,7 +23,7 @@ namespace $safeprojectname$.UI
     public partial class SettingWindow : Window
     {
 		readonly SettingWVM _settingWVM;
-        readonly ILogger<MainWindow> _logger = Singleton.ILoggerFactory.CreateLogger<MainWindow>();
+        readonly ILogger<SettingWindow> _logger = Singleton.ILoggerFactory.CreateLogger<SettingWindow>();
         public SettingWindow()
         {
             InitializeComponent();            
