@@ -18,10 +18,19 @@ namespace $safeprojectname$.UI.ViewModels
             this.Image = t.GetAttribute<ImageResourceAttribute>()?.GetImage();
             Childs.CollectionChanged += Childs_CollectionChanged;
         }
+        public EnumVM(TEnum t, string name) : this(t)
+        {
+            this.Name = name;
+        }
         public EnumVM(TEnum t, IEnumerable<EnumVM<TEnum>> childs) : this(t)
         {
             foreach (var item in childs) this.Childs.Add(item);
         }
+        public EnumVM(TEnum t, string name, IEnumerable<EnumVM<TEnum>> childs) : this(t, name)
+        {
+            foreach (var item in childs) this.Childs.Add(item);
+        }
+
 
         private void Childs_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {

@@ -7,15 +7,33 @@ namespace $safeprojectname$.UI.ViewModels
 {
     internal class EnumCommandVM<TEnum> : EnumVM<TEnum> where TEnum : Enum
     {
-        public EnumCommandVM(TEnum t, ICommand command) : base(t)
+        public EnumCommandVM(TEnum t, ICommand command)
+            : base(t)
         {
             this.Command = command ?? throw new ArgumentNullException(nameof(command));
         }
-        public EnumCommandVM(TEnum t, Action action) : base(t)
+        public EnumCommandVM(TEnum t, string name, ICommand command)
+            : base(t, name)
+        {
+            this.Command = command ?? throw new ArgumentNullException(nameof(command));
+        }
+        public EnumCommandVM(TEnum t, Action action)
+            : base(t)
         {
             this.Command = new BaseCommand(action ?? throw new ArgumentNullException(nameof(action)));
         }
-        public EnumCommandVM(TEnum t, IEnumerable<EnumCommandVM<TEnum>> childs) : base(t, childs)
+        public EnumCommandVM(TEnum t, string name, Action action)
+            : base(t, name)
+        {
+            this.Command = new BaseCommand(action ?? throw new ArgumentNullException(nameof(action)));
+        }
+        public EnumCommandVM(TEnum t, IEnumerable<EnumCommandVM<TEnum>> childs)
+            : base(t, childs)
+        {
+
+        }
+        public EnumCommandVM(TEnum t, string name, IEnumerable<EnumCommandVM<TEnum>> childs)
+            : base(t, name, childs)
         {
 
         }
@@ -24,19 +42,43 @@ namespace $safeprojectname$.UI.ViewModels
     }
     internal class EnumCommandVM<TEnum, TParam> : EnumCommandVM<TEnum> where TEnum : Enum
     {
-        public EnumCommandVM(TEnum t, Action<TParam> commandExecute) : base(t, new BaseCommand<TParam>(commandExecute))
+        public EnumCommandVM(TEnum t, Action<TParam> commandExecute)
+            : base(t, new BaseCommand<TParam>(commandExecute))
         {
 
         }
-        public EnumCommandVM(TEnum t, Action<TParam> commandExecute, Func<TParam, bool> canExecute) : base(t, new BaseCommand<TParam>(commandExecute, canExecute))
+        public EnumCommandVM(TEnum t, string name, Action<TParam> commandExecute)
+            : base(t, name, new BaseCommand<TParam>(commandExecute))
         {
 
         }
-        public EnumCommandVM(TEnum t, IEnumerable<EnumCommandVM<TEnum>> childs) : base(t, childs)
+        public EnumCommandVM(TEnum t, Action<TParam> commandExecute, Func<TParam, bool> canExecute)
+            : base(t, new BaseCommand<TParam>(commandExecute, canExecute))
         {
 
         }
-        public EnumCommandVM(TEnum t, IEnumerable<EnumCommandVM<TEnum, TParam>> childs) : base(t, childs)
+        public EnumCommandVM(TEnum t, string name, Action<TParam> commandExecute, Func<TParam, bool> canExecute)
+            : base(t, name, new BaseCommand<TParam>(commandExecute, canExecute))
+        {
+
+        }
+        public EnumCommandVM(TEnum t, IEnumerable<EnumCommandVM<TEnum>> childs)
+            : base(t, childs)
+        {
+
+        }
+        public EnumCommandVM(TEnum t, string name, IEnumerable<EnumCommandVM<TEnum>> childs)
+            : base(t, name, childs)
+        {
+
+        }
+        public EnumCommandVM(TEnum t, IEnumerable<EnumCommandVM<TEnum, TParam>> childs)
+            : base(t, childs)
+        {
+
+        }
+        public EnumCommandVM(TEnum t, string name, IEnumerable<EnumCommandVM<TEnum, TParam>> childs)
+            : base(t, name, childs)
         {
 
         }
