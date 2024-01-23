@@ -6,33 +6,34 @@ using $safeprojectname$.UI.ViewModels.Commands;
 
 namespace $safeprojectname$.UI.ViewModels
 {
-    internal class EnumCommandDataVM<TEnum, TData> : EnumVM<TEnum> where TEnum : Enum
+    internal class EnumCommandDataVM<TEnum, TData> : EnumCommandVM<TEnum> where TEnum : Enum
     {
-        public EnumCommandDataVM(TEnum t, BaseCommandData<TData> baseCommandData) : base(t)
+        public EnumCommandDataVM(TEnum t, ICommand command) : base(t, command)
         {
-            this.Command = baseCommandData ?? throw new ArgumentNullException(nameof(baseCommandData));
         }
-        public EnumCommandDataVM(TEnum t, TData data, Action<TData> execute) : base(t)
+        public EnumCommandDataVM(TEnum t, string name, ICommand command) : base(t, name, command)
         {
-            this.Command = new BaseCommandData<TData>(data, execute);
-        }
-        public EnumCommandDataVM(TEnum t, TData data, Action<TData> execute, Func<TData, bool> canExecute) : base(t)
-        {
-            this.Command = new BaseCommandData<TData>(data, execute, canExecute);
         }
 
 
-        public EnumCommandDataVM(TEnum t, string name, BaseCommandData<TData> baseCommandData) : base(t, name)
+        public EnumCommandDataVM(TEnum t, TData data, Action<TData> execute)
+            : this(t, new BaseCommandData<TData>(data, execute))
         {
-            this.Command = baseCommandData ?? throw new ArgumentNullException(nameof(baseCommandData));
         }
-        public EnumCommandDataVM(TEnum t, string name, TData data, Action<TData> execute) : base(t, name)
+        public EnumCommandDataVM(TEnum t, TData data, Action<TData> execute, Func<TData, bool> canExecute)
+            : this(t, new BaseCommandData<TData>(data, execute, canExecute))
         {
-            this.Command = new BaseCommandData<TData>(data, execute);
+
         }
-        public EnumCommandDataVM(TEnum t, string name, TData data, Action<TData> execute, Func<TData, bool> canExecute) : base(t, name)
+
+
+        public EnumCommandDataVM(TEnum t, string name, TData data, Action<TData> execute)
+            : this(t, name, new BaseCommandData<TData>(data, execute))
         {
-            this.Command = new BaseCommandData<TData>(data, execute, canExecute);
+        }
+        public EnumCommandDataVM(TEnum t, string name, TData data, Action<TData> execute, Func<TData, bool> canExecute)
+            : this(t, name, new BaseCommandData<TData>(data, execute, canExecute))
+        {
         }
 
 
@@ -42,37 +43,34 @@ namespace $safeprojectname$.UI.ViewModels
         public EnumCommandDataVM(TEnum t, string name, IEnumerable<EnumVM<TEnum>> childs) : base(t, name, childs)
         {
         }
-
-        public ICommand? Command { get; }
     }
-
-    internal class EnumCommandDataVM<TEnum, TData, TParam> : EnumVM<TEnum> where TEnum : Enum
+    internal class EnumCommandDataVM<TEnum, TData, TParam> : EnumCommandDataVM<TEnum, TData> where TEnum : Enum
     {
-        public EnumCommandDataVM(TEnum t, BaseCommandData<TData, TParam> baseCommandData) : base(t)
+        public EnumCommandDataVM(TEnum t, ICommand command) : base(t, command)
         {
-            this.Command = baseCommandData ?? throw new ArgumentNullException(nameof(baseCommandData));
         }
-        public EnumCommandDataVM(TEnum t, TData data, Action<TData, TParam> execute) : base(t)
+        public EnumCommandDataVM(TEnum t, string name, ICommand command) : base(t, name, command)
         {
-            this.Command = new BaseCommandData<TData, TParam>(data, execute);
-        }
-        public EnumCommandDataVM(TEnum t, TData data, Action<TData, TParam> execute, Func<TData, TParam, bool> canExecute) : base(t)
-        {
-            this.Command = new BaseCommandData<TData, TParam>(data, execute, canExecute);
         }
 
 
-        public EnumCommandDataVM(TEnum t, string name, BaseCommandData<TData, TParam> baseCommandData) : base(t, name)
+        public EnumCommandDataVM(TEnum t, TData data, Action<TData, TParam> execute)
+            : base(t, new BaseCommandData<TData, TParam>(data, execute))
         {
-            this.Command = baseCommandData ?? throw new ArgumentNullException(nameof(baseCommandData));
         }
-        public EnumCommandDataVM(TEnum t, string name, TData data, Action<TData, TParam> execute) : base(t, name)
+        public EnumCommandDataVM(TEnum t, TData data, Action<TData, TParam> execute, Func<TData, TParam, bool> canExecute)
+            : base(t, new BaseCommandData<TData, TParam>(data, execute, canExecute))
         {
-            this.Command = new BaseCommandData<TData, TParam>(data, execute);
         }
-        public EnumCommandDataVM(TEnum t, string name, TData data, Action<TData, TParam> execute, Func<TData, TParam, bool> canExecute) : base(t, name)
+
+
+        public EnumCommandDataVM(TEnum t, string name, TData data, Action<TData, TParam> execute)
+            : base(t, name, new BaseCommandData<TData, TParam>(data, execute))
         {
-            this.Command = new BaseCommandData<TData, TParam>(data, execute, canExecute);
+        }
+        public EnumCommandDataVM(TEnum t, string name, TData data, Action<TData, TParam> execute, Func<TData, TParam, bool> canExecute)
+            : base(t, name, new BaseCommandData<TData, TParam>(data, execute, canExecute))
+        {
         }
 
 
@@ -82,7 +80,4 @@ namespace $safeprojectname$.UI.ViewModels
         public EnumCommandDataVM(TEnum t, string name, IEnumerable<EnumVM<TEnum>> childs) : base(t, name, childs)
         {
         }
-
-        public ICommand? Command { get; }
-    }
 }
