@@ -16,83 +16,41 @@ namespace $safeprojectname$.UI.ViewModels
             this.Value = t;
             this.Name = t.GetAttribute<NameAttribute>()?.Name ?? t.ToString();
             this.Image = t.GetAttribute<ImageResourceAttribute>()?.GetImage();
-            Childs.CollectionChanged += Childs_CollectionChanged;
+            Childs.OnItemAdded += Childs_OnItemAdded;
+            Childs.OnItemRemoved += Childs_OnItemRemoved;
         }
-        public EnumVM(TEnum t, string name) : this(t)
-        {
-            this.Name = name;
-        }
+
         public EnumVM(TEnum t, IEnumerable<EnumVM<TEnum>> childs) : this(t)
         {
             foreach (var item in childs) this.Childs.Add(item);
         }
-        public EnumVM(TEnum t, string name, IEnumerable<EnumVM<TEnum>> childs) : this(t, name)
-        {
-            foreach (var item in childs) this.Childs.Add(item);
-        }
 
-
-        private void Childs_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        private void Childs_OnItemAdded(EnumVM<TEnum> item)
         {
-            switch(e.Action)
+            if (item is not null)
             {
-                case NotifyCollectionChangedAction.Add:
-                    if (e.NewItems is not null)
-                    {
-                        foreach (var item in e.NewItems.Cast<EnumVM<TEnum>>().Where(x => x is not null))
-                        {
-                            if (item.Parent is not null)
-                                throw new InvalidOperationException();
+                if (item.Parent is not null)
+                    throw new InvalidOperationException($"Menu '{item.Name}' are under '{item.Parent.Name}'");
 
-                            item.Parent = this;
-                        }
-                    }
-                    break;
+                item.Parent = this;
+            }
+        }
+        private void Childs_OnItemRemoved(EnumVM<TEnum> item)
+        {
+            if (item is not null)
+            {
+                if (item.Parent is null)
+                    throw new InvalidOperationException($"Menu '{item.Name}' are not under parent");
 
-                case NotifyCollectionChangedAction.Reset:
-                case NotifyCollectionChangedAction.Remove:
-                    if (e.OldItems is not null)
-                    {
-                        foreach (var item in e.OldItems.Cast<EnumVM<TEnum>>().Where(x => x is not null))
-                        {
-                            if (item.Parent is null)
-                                throw new InvalidOperationException();
-
-                            item.Parent = null;
-                        }
-                    }
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    if (e.NewItems is not null)
-                    {
-                        foreach (var item in e.NewItems.Cast<EnumVM<TEnum>>().Where(x => x is not null))
-                        {
-                            if (item.Parent is not null)
-                                throw new InvalidOperationException();
-
-                            item.Parent = this;
-                        }
-                    }
-                    if (e.OldItems is not null)
-                    {
-                        foreach (var item in e.OldItems.Cast<EnumVM<TEnum>>().Where(x => x is not null))
-                        {
-                            if (item.Parent is null)
-                                throw new InvalidOperationException();
-
-                            item.Parent = null;
-                        }
-                    }
-                    break;
+                item.Parent = null;
             }
         }
 
-
-        public string Name { get; }
+        public string Name { get; set; }
 
         public TEnum Value { get; }
 
-        public ImageSource? Image { get; }
+        public ImageSource? Image { get; set; }
 
         public EnumVM<TEnum>? Parent { get; private set; }
 
