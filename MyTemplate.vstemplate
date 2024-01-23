@@ -34,6 +34,7 @@
         <Folder Name="ViewModels" TargetFolderName="ViewModels">
           <Folder Name="Commands" TargetFolderName="Commands">
             <ProjectItem ReplaceParameters="true" TargetFileName="BaseCommand.cs">BaseCommand.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="BaseCommandData.cs">BaseCommandData.cs</ProjectItem>
           </Folder>
           <Folder Name="WindowViewModels" TargetFolderName="WindowViewModels">
             <ProjectItem ReplaceParameters="true" TargetFileName="MainWVM.cs">MainWVM.cs</ProjectItem>
