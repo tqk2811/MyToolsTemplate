@@ -31,9 +31,11 @@ namespace $safeprojectname$
         }
 
 
-        public static void ShowMessageBox(this Exception ex)
+        public static void ShowMessageBox(this Exception ex, bool isShowStackTrace = false)
         {
-            MessageBox.Show($"{ex.Message}\r\n{ex.StackTrace}", ex.GetType().FullName);
+            string message = ex.Message;
+            if (isShowStackTrace) message += "\r\n" + ex.StackTrace;
+            MessageBox.Show(message, ex.GetType().FullName);
         }
         public static void LogErrorFunction(this ILogger? logger, Exception ex, [CallerMemberName] string? functionName = "")
         {
