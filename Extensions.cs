@@ -30,6 +30,10 @@ namespace $safeprojectname$
                 scheduler: TaskScheduler.Default).Unwrap();
         }
 
+        public static T RemoveFlag<T>(this T @enum, T flag) where T : struct, Enum
+        {
+            return (T)@enum.And(flag.Not());
+        }
 
         public static void ShowMessageBox(this Exception ex, bool isShowStackTrace = false)
         {
