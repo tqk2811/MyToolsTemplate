@@ -20,12 +20,12 @@ namespace $safeprojectname$.UI.ViewModels
             Childs.OnItemRemoved += Childs_OnItemRemoved;
         }
 
-        public EnumVM(TEnum t, IEnumerable<EnumVM<TEnum>> childs) : this(t)
+        public EnumVM(TEnum t, IEnumerable<EnumVM<TEnum>?> childs) : this(t)
         {
             foreach (var item in childs) this.Childs.Add(item);
         }
 
-        private void Childs_OnItemAdded(EnumVM<TEnum> item)
+        private void Childs_OnItemAdded(EnumVM<TEnum>? item)
         {
             if (item is not null)
             {
@@ -35,7 +35,7 @@ namespace $safeprojectname$.UI.ViewModels
                 item.Parent = this;
             }
         }
-        private void Childs_OnItemRemoved(EnumVM<TEnum> item)
+        private void Childs_OnItemRemoved(EnumVM<TEnum>? item)
         {
             if (item is not null)
             {
@@ -54,6 +54,6 @@ namespace $safeprojectname$.UI.ViewModels
 
         public EnumVM<TEnum>? Parent { get; private set; }
 
-        public DispatcherObservableCollection<EnumVM<TEnum>> Childs { get; } = new DispatcherObservableCollection<EnumVM<TEnum>>();
+        public DispatcherObservableCollection<EnumVM<TEnum>?> Childs { get; } = new DispatcherObservableCollection<EnumVM<TEnum>?>();
     }
 }
