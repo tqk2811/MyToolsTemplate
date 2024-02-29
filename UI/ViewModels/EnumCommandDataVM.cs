@@ -23,7 +23,7 @@ namespace $safeprojectname$.UI.ViewModels
         }
 
 
-        public EnumCommandDataVM(TEnum t, IEnumerable<EnumVM<TEnum>> childs) : base(t, childs)
+        public EnumCommandDataVM(TEnum t, IEnumerable<EnumVM<TEnum>?> childs) : base(t, childs)
         {
         }
     }
@@ -44,7 +44,7 @@ namespace $safeprojectname$.UI.ViewModels
         }
 
 
-        public EnumCommandDataVM(TEnum t, IEnumerable<EnumVM<TEnum>> childs) : base(t, childs)
+        public EnumCommandDataVM(TEnum t, IEnumerable<EnumVM<TEnum>?> childs) : base(t, childs)
         {
         }
     }
