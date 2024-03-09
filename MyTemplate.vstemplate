@@ -37,6 +37,7 @@
             <ProjectItem ReplaceParameters="true" TargetFileName="BaseCommandData.cs">BaseCommandData.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="OpenFileDialogCommand.cs">OpenFileDialogCommand.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="OpenFolderDialogCommand.cs">OpenFolderDialogCommand.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="OpenWindowCommand.cs">OpenWindowCommand.cs</ProjectItem>
           </Folder>
           <Folder Name="WindowViewModels" TargetFolderName="WindowViewModels">
             <ProjectItem ReplaceParameters="true" TargetFileName="MainWVM.cs">MainWVM.cs</ProjectItem>
