@@ -1,5 +1,9 @@
-﻿using $safeprojectname$.DataClass;
-using $safeprojectname$.UI.Commands;
+﻿using Microsoft.Extensions.Logging;
+using $safeprojectname$.DataClass;
+using $safeprojectname$.UI.ViewModels.Commands;
+using System;
+using System.Diagnostics;
+using System.Windows;
 using TqkLibrary.WpfUi;
 
 namespace $safeprojectname$.UI.ViewModels
