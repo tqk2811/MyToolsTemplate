@@ -35,6 +35,7 @@
           <Folder Name="Commands" TargetFolderName="Commands">
             <ProjectItem ReplaceParameters="true" TargetFileName="BaseCommand.cs">BaseCommand.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="BaseCommandData.cs">BaseCommandData.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="BaseDialogCommand.cs">BaseDialogCommand.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="OpenFileDialogCommand.cs">OpenFileDialogCommand.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="OpenFolderDialogCommand.cs">OpenFolderDialogCommand.cs</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="OpenWindowCommand.cs">OpenWindowCommand.cs</ProjectItem>
