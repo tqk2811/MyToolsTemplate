@@ -19,7 +19,7 @@ namespace $safeprojectname$.UI.ViewModels
         }
         
         protected SettingData Setting { get { return Singleton.Setting.Data; } }
-        protected void SaveSetting() => Singleton.Setting.TriggerSave();
+        public virtual void SaveSetting() => Singleton.Setting.TriggerSave();
 
         
         public BaseCommand<string> CopyTextCommand { get; }

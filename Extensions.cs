@@ -9,6 +9,7 @@ using System.Windows;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
 using TqkLibrary.WpfUi.Converters;
+using $safeprojectname$.UI.ViewModels;
 
 namespace $safeprojectname$
 {
@@ -45,6 +46,22 @@ namespace $safeprojectname$
         public static void LogErrorFunction(this ILogger? logger, Exception ex, [CallerMemberName] string? functionName = "")
         {
             logger?.LogError(ex, functionName);
+        }
+
+        
+        public static IEnumerable<EnumVM<T>> GetAll<T>(this IEnumerable<EnumVM<T>?> enumVMs) where T : Enum
+        {
+            foreach (var item in enumVMs)
+            {
+                if (item is not null)
+                {
+                    yield return item;
+                    foreach (var child in item.Childs.GetAll())
+                    {
+                        yield return child;
+                    }
+                }
+            }
         }
     }
 }
