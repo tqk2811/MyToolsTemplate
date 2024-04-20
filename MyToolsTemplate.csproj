@@ -32,9 +32,10 @@
 		</PackageReference> -->
 		<!-- <PackageReference Include="SpicyTaco.AutoGrid" Version="1.2.29" /> -->
 		<PackageReference Include="TqkLibrary.AutoGrid" Version="1.2.29" />
-		<PackageReference Include="TqkLibrary.Linq" Version="1.0.0-build20231030102212" />
-		<!-- <PackageReference Include="TqkLibrary.Queues" Version="1.0.0-build20230814174501" /> -->
-		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20240116153726" />
+		<PackageReference Include="TqkLibrary.Linq" Version="1.0.0-build20240325150111" />
+		<PackageReference Include="TqkLibrary.Utils" Version="1.0.0-build20240415170434" />
+		<!-- <PackageReference Include="TqkLibrary.Queues" Version="1.0.0-build20240416101957" /> -->
+		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20240308171524" />
 	</ItemGroup>
 
 
