@@ -18,7 +18,7 @@ namespace $safeprojectname$.UI.ViewModels
             this._saveCallback = saveCallback ?? throw new ArgumentNullException(nameof(saveCallback));
         }
 
-        public void Save()
+        public virtual void Save()
         {
             _saveCallback?.Invoke();
             Change?.Invoke(this, Data);
