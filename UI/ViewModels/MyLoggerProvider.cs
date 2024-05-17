@@ -47,13 +47,14 @@ namespace $safeprojectname$.UI.ViewModels
                     return;
                 }
 
+                string time = DateTime.Now.ToString("HH:mm:ss");
                 if (exception is not null)
                 {
-                    _myLoggerProvider.AddAsync($"[{logLevel,-12}] {_categoryName} - {exception.GetType().FullName}: {exception.Message}\r\n{exception.StackTrace}");
+                    _myLoggerProvider.AddAsync($"{time} [{logLevel,-12}] {_categoryName} - {exception.GetType().FullName}: {exception.Message}\r\n{exception.StackTrace}");
                 }
                 else
                 {
-                    _myLoggerProvider.AddAsync($"[{logLevel,-12}] {_categoryName} - {formatter(state, exception)}");
+                    _myLoggerProvider.AddAsync($"{time} [{logLevel,-12}] {_categoryName} - {formatter(state, exception)}");
                 }
             }
         }
