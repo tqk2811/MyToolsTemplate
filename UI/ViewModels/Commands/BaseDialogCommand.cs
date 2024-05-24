@@ -14,18 +14,28 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
+        readonly Func<bool>? _canExecute;
 
         public BaseDialogCommand()
         {
 
         }
-        public BaseDialogCommand(Action<string?>? pathCallback)
+        public BaseDialogCommand(Func<bool>? canExecute) : this(null, canExecute)
+        {
+            
+        }
+        public BaseDialogCommand(Action<string?>? pathCallback): this(pathCallback, null)
+        {
+            
+        }
+        public BaseDialogCommand(Action<string?>? pathCallback, Func<bool>? canExecute)
         {
             if (pathCallback is not null)
                 OnPathSelected += pathCallback;
+            this._canExecute = canExecute;
         }
-        public event Action<string?>? OnPathSelected;
 
+        public virtual event Action<string?>? OnPathSelected;
         string? _Path = null;
         public virtual string? Path
         {
@@ -33,8 +43,16 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             set { _Path = value; NotifyPropertyChange(); OnPathSelected?.Invoke(value); }
         }
 
+        public override bool CanExecute(object? parameter)
+        {
+            return _canExecute?.Invoke() ?? true;
+        }
         public override abstract void Execute(object? parameter);
-
+        public override void FireCanExecuteChanged(object? sender, EventArgs e)
+        {
+            base.FireCanExecuteChanged(sender, e);
+            NotifyPropertyChange(nameof(Path));
+        }
 
         public static implicit operator string?(BaseDialogCommand baseDialogCommand) => baseDialogCommand?.Path;
     }
@@ -44,6 +62,12 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         protected readonly Expression<Func<TObject, string?>> _expression;
         protected readonly Action _saveCallback;
         public BaseDialogCommand(TObject @object, Expression<Func<TObject, string?>> expression, Action saveCallback)
+            : this(@object, expression, saveCallback, null)
+        {
+
+        }
+        public BaseDialogCommand(TObject @object, Expression<Func<TObject, string?>> expression, Action saveCallback, Func<bool>? canExecute)
+            : base(canExecute)
         {
             this._object = @object ?? throw new ArgumentNullException(nameof(@object));
             this._expression = expression ?? throw new ArgumentNullException(nameof(expression));
@@ -55,6 +79,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             if (!propertyInfo.CanRead || !propertyInfo.CanWrite) throw new InvalidOperationException($"{nameof(expression)} invalid selector, must be get and set");
         }
 
+        public override event Action<string?>? OnPathSelected;
         public override string? Path
         {
             get { return _expression.Compile().Invoke(_object); }
@@ -65,6 +90,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
                 prop.SetValue(_object, value);
                 NotifyPropertyChange();
                 _saveCallback.Invoke();
+                OnPathSelected?.Invoke(value);
             }
         }
     }

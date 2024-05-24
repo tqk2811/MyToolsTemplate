@@ -20,6 +20,9 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         public BaseCommand(Action execute) : this(execute, () => true)
         {
         }
+        public BaseCommand(Func<bool> canExecute) : this(() => { }, canExecute)
+        {
+        }
         public BaseCommand(Action execute, Func<bool> canExecute) : this(execute, canExecute, App.Current.Dispatcher)
         {
         }

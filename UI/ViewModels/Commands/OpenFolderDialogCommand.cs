@@ -13,10 +13,14 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         {
 
         }
-        public OpenFolderDialogCommand(Action<string?>? pathCallback) : base(pathCallback)
+        public OpenFolderDialogCommand(Action<string?>? pathCallback) : this(pathCallback, null)
         {
-            if (pathCallback is not null)
-                OnPathSelected += pathCallback;
+        }
+        public OpenFolderDialogCommand(Func<bool>? canExecute) : this(null, canExecute)
+        {
+        }
+        public OpenFolderDialogCommand(Action<string?>? pathCallback, Func<bool>? canExecute) : base(pathCallback, canExecute)
+        {
         }
 
         public override void Execute(object? parameter)
@@ -27,7 +31,11 @@ namespace $safeprojectname$.UI.ViewModels.Commands
     internal class OpenFolderDialogCommand<TObject> : BaseDialogCommand<TObject>
     {
         public OpenFolderDialogCommand(TObject @object, Expression<Func<TObject, string?>> expression, Action saveCallback)
-            : base(@object, expression, saveCallback)
+            : this(@object, expression, saveCallback, null)
+        {
+        }
+        public OpenFolderDialogCommand(TObject @object, Expression<Func<TObject, string?>> expression, Action saveCallback, Func<bool>? canExecute)
+            : base(@object, expression, saveCallback, canExecute)
         {
         }
 
@@ -60,6 +68,11 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             where T : class
         {
             return new OpenFolderDialogCommand<T>(obj, expression, saveCallback);
+        }
+        public static OpenFolderDialogCommand<T> OpenFolderDialogCommand<T>(this T obj, Expression<Func<T, string?>> expression, Action saveCallback, Func<bool>? canExecute)
+            where T : class
+        {
+            return new OpenFolderDialogCommand<T>(obj, expression, saveCallback, canExecute);
         }
     }
 }

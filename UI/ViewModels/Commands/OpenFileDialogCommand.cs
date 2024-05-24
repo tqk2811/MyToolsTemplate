@@ -8,10 +8,16 @@ namespace $safeprojectname$.UI.ViewModels.Commands
     internal class OpenFileDialogCommand : BaseDialogCommand
     {
         readonly string _filter;
-        public OpenFileDialogCommand(string filter) : this(filter, null)
+        public OpenFileDialogCommand(string filter) : this(filter, null, null)
         {
         }
-        public OpenFileDialogCommand(string filter, Action<string?>? pathCallback) : base(pathCallback)
+        public OpenFileDialogCommand(string filter, Action<string?>? pathCallback) : this(filter, pathCallback, null)
+        {
+        }
+        public OpenFileDialogCommand(string filter, Func<bool>? canExecute) : this(filter, null, canExecute)
+        {
+        }
+        public OpenFileDialogCommand(string filter, Action<string?>? pathCallback, Func<bool>? canExecute) : base(pathCallback, canExecute)
         {
             if (string.IsNullOrWhiteSpace(filter)) throw new ArgumentNullException(nameof(filter));
             _filter = filter;
@@ -26,7 +32,11 @@ namespace $safeprojectname$.UI.ViewModels.Commands
     {
         readonly string _filter;
         public OpenFileDialogCommand(TObject @object, Expression<Func<TObject, string?>> expression, Action saveCallback, string filter)
-            : base(@object, expression, saveCallback)
+            : this(@object, expression, saveCallback, filter, null)
+        {
+        }
+        public OpenFileDialogCommand(TObject @object, Expression<Func<TObject, string?>> expression, Action saveCallback, string filter, Func<bool>? canExecute)
+            : base(@object, expression, saveCallback, canExecute)
         {
             if (string.IsNullOrWhiteSpace(filter)) throw new ArgumentNullException(nameof(filter));
             this._filter = filter;
@@ -63,6 +73,11 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             where T : class
         {
             return new OpenFileDialogCommand<T>(obj, expression, saveCallback, filter);
+        }
+        public static OpenFileDialogCommand<T> OpenFileDialogCommand<T>(this T obj, Expression<Func<T, string?>> expression, Action saveCallback, string filter, Func<bool>? canExecute)
+            where T : class
+        {
+            return new OpenFileDialogCommand<T>(obj, expression, saveCallback, filter, canExecute);
         }
     }
 }
