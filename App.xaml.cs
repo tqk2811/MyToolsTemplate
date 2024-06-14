@@ -17,6 +17,9 @@ namespace $safeprojectname$
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
+            CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.CurrentCulture;
             if (System.IO.Directory.GetCurrentDirectory().StartsWith(System.IO.Path.GetTempPath()))
             {
                 MessageBox.Show("Hãy giải nén ra để chạy", "Thông báo");
