@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Globalization;
 
 namespace $safeprojectname$
 {
@@ -15,6 +16,7 @@ namespace $safeprojectname$
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
             if (System.IO.Directory.GetCurrentDirectory().StartsWith(System.IO.Path.GetTempPath()))
             {
                 MessageBox.Show("Hãy giải nén ra để chạy", "Thông báo");
