@@ -4,6 +4,7 @@ using $safeprojectname$.UI.ViewModels.Commands;
 using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
 using TqkLibrary.WpfUi;
 
 namespace $safeprojectname$.UI.ViewModels
@@ -21,7 +22,14 @@ namespace $safeprojectname$.UI.ViewModels
         protected SettingData Setting { get { return Singleton.Setting.Data; } }
         public virtual void SaveSetting() => Singleton.Setting.TriggerSave();
 
-        
+        Cursor? _Cursor = null;
+        public Cursor? Cursor
+        {
+            get { return _Cursor; }
+            set { _Cursor = value; NotifyPropertyChange(); }
+        }
+
+
         public BaseCommand<string> CopyTextCommand { get; }
         void _CopyTextCommand(string text)
         {
