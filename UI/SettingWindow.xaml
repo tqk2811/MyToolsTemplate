@@ -11,6 +11,7 @@
         xmlns:WpfUiControl="clr-namespace:TqkLibrary.WpfUi.UserControls;assembly=TqkLibrary.WpfUi"
         xmlns:WpfUiConveter="clr-namespace:TqkLibrary.WpfUi.Converters;assembly=TqkLibrary.WpfUi"
         xmlns:st="http://schemas.spicytaco.io/"
+        Cursor="{Binding Cursor}"
         mc:Ignorable="d"
         Title="SettingWindow" WindowStartupLocation="CenterOwner" Height="450" Width="800">
     <Window.DataContext>
