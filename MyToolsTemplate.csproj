@@ -25,7 +25,7 @@
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
 		<PackageReference Include="Microsoft-WindowsAPICodePack-Shell-6.0" Version="1.1.6" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<!-- <PackageReference Include="Newtonsoft.Json" Version="13.0.1" /> -->
 		<!-- <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -35,7 +35,7 @@
 		<PackageReference Include="TqkLibrary.Linq" Version="1.0.0-build20240325150111" />
 		<PackageReference Include="TqkLibrary.Utils" Version="1.0.0-build20240415170434" />
 		<!-- <PackageReference Include="TqkLibrary.Queues" Version="1.0.0-build20240416101957" /> -->
-		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20240308171524" />
+		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20240628170930" />
 	</ItemGroup>
 
 

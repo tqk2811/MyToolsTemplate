@@ -7,7 +7,7 @@ namespace $safeprojectname$.UI.ViewModels
     class MyLoggerProviderVM : LimitObservableCollection<string>, ILoggerProvider
     {
         public LogLevel LogLevel { get; set; } = LogLevel.Information;
-        public MyLoggerProviderVM() : base(() => Singleton.LogDir + $"\\{DateTime.Now:yyyy-MM-dd}.log")
+        public MyLoggerProviderVM() : base(() => Singleton.LogDir + $"\\{DateTime.Now:yyyy-MM-dd HH}.log")
         {
 
         }

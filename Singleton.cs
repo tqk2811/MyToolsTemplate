@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using TqkLibrary.WpfUi;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using TqkLibrary.Data.Json;
 using Newtonsoft.Json.Converters;
 
 namespace $safeprojectname$
