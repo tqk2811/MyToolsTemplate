@@ -9,6 +9,7 @@ using System.Windows;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
 using TqkLibrary.WpfUi.Converters;
+using TqkLibrary.WpfUi;
 using $safeprojectname$.UI.ViewModels;
 
 namespace $safeprojectname$
