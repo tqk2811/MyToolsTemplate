@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Windows
 using System.Windows.Media;
 using TqkLibrary.WpfUi;
 using TqkLibrary.WpfUi.ObservableCollections;
@@ -61,7 +62,7 @@ namespace $safeprojectname$.UI.ViewModels
             get{ return _Image; }
             set{ _Image = value; NotifyPropertyChange(); }
         }
-        
+
         Visibility _Visibility = Visibility.Visible;
         public Visibility Visibility
         {
