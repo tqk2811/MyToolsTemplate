@@ -9,7 +9,7 @@ using TqkLibrary.WpfUi.ObservableCollections;
 
 namespace $safeprojectname$.UI.ViewModels
 {
-    internal class EnumVM<TEnum> where TEnum : Enum
+    internal class EnumVM<TEnum> : BaseViewModel where TEnum : Enum
     {
         public EnumVM(TEnum t)
         {
@@ -46,11 +46,28 @@ namespace $safeprojectname$.UI.ViewModels
             }
         }
 
-        public string Name { get; set; }
-
         public TEnum Value { get; }
 
-        public ImageSource? Image { get; set; }
+        string _Name = string.Empty;
+        public string Name
+        {
+            get{ return _Name; }
+            set{ _Name = value; NotifyPropertyChange(); }
+        }
+
+        ImageSource? _Image = null;
+        public ImageSource? Image 
+        {
+            get{ return _Image; }
+            set{ _Image = value; NotifyPropertyChange(); }
+        }
+        
+        Visibility _Visibility = Visibility.Visible;
+        public Visibility Visibility
+        {
+            get { return _Visibility; }
+            set { _Visibility = value; NotifyPropertyChange(); }
+        }
 
         public EnumVM<TEnum>? Parent { get; private set; }
 
