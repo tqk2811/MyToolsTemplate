@@ -29,6 +29,12 @@ namespace $safeprojectname$.UI.ViewModels
             set { _Cursor = value; NotifyPropertyChange(); }
         }
 
+        Visibility _Visibility = Visibility.Visible;
+        public Visibility Visibility
+        {
+            get { return _Visibility; }
+            set { _Visibility = value; NotifyPropertyChange(); }
+        }
 
         public BaseCommand<string> CopyTextCommand { get; }
         void _CopyTextCommand(string text)
