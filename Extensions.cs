@@ -14,7 +14,7 @@ using $safeprojectname$.UI.ViewModels;
 
 namespace $safeprojectname$
 {
-    static class Extensions
+    static partial class Extensions
     {
         /// <summary>
         /// A workaround for getting all of AggregateException.InnerExceptions with try/await/catch
