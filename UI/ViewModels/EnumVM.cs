@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Windows
+using System.Windows;
 using System.Windows.Media;
 using TqkLibrary.WpfUi;
 using TqkLibrary.WpfUi.ObservableCollections;
