@@ -83,6 +83,7 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Singleton.cs">Singleton.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="SingletonBuildDate.tt">SingletonBuildDate.tt</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Extensions.cs">Extensions.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Extensions.TestProxy.cs">Extensions.TestProxy.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Resource.Designer.cs">Resource.Designer.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Resource.resx">Resource.resx</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="SingletonBuildDate.g.cs">SingletonBuildDate.g.cs</ProjectItem>
