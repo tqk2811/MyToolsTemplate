@@ -20,6 +20,8 @@ namespace $safeprojectname$
         static Singleton()
         {
             Directory.CreateDirectory(LogDir);
+            Directory.CreateDirectory(UserDataDirs);
+            Directory.CreateDirectory(ChromeDriversDir);
             JsonSerializerSettings = new JsonSerializerSettings();
             JsonSerializerSettings.Converters.Add(new StringEnumConverter());
             Setting = new SaveJsonData<SettingData>(SettingJson, JsonSerializerSettings);
@@ -31,6 +33,8 @@ namespace $safeprojectname$
         internal static string AppDataDir { get; } = Path.Combine(ExeDir, "AppData");
         internal static string SettingJson { get; } = Path.Combine(ExeDir, "Setting.json");
         internal static string UiSettingJson { get; } = Path.Combine(ExeDir, "UiSetting.json");
+        internal static string UserDataDirs { get; } = Path.Combine(ExeDir, "UserDataDirs");
+        internal static string ChromeDriversDir { get; } = Path.Combine(ExeDir, "ChromeDriversDir");
 
         internal static JsonSerializerSettings JsonSerializerSettings { get; }
         internal static ILoggerFactory ILoggerFactory { get; set; }

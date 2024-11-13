@@ -12,9 +12,14 @@ namespace $safeprojectname$.UI.ViewModels.WindowViewModels
 {
     class MainWVM : BaseVM
     {
+        public MainWVM()
+        {
+            ProxyVM = new(Setting.ProxySettingData, SaveSetting);
+        }
         public string WindowTitle => $"$safeprojectname$ - build {Singleton.BuildDate:HH:mm:ss dd/MM/yyyy}";
 
 
+        public ProxyVM ProxyVM { get; }
 
 
 

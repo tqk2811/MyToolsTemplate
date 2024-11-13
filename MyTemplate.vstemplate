@@ -25,11 +25,30 @@
       </Folder>
       <Folder Name="AppData" TargetFolderName="AppData" />
       <Folder Name="DataClass" TargetFolderName="DataClass">
+        <ProjectItem ReplaceParameters="true" TargetFileName="DictConfigureData.cs">DictConfigureData.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProxySettingData.cs">ProxySettingData.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="SettingData.cs">SettingData.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="UiSettingData.cs">UiSettingData.cs</ProjectItem>
       </Folder>
-      <Folder Name="Enums" TargetFolderName="Enums" />
+      <Folder Name="Resources" TargetFolderName="Resources">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Preferences.json">Preferences.jsons</ProjectItem>
+      </Folder>
+      <Folder Name="SeleniumProfiles" TargetFolderName="SeleniumProfiles">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ChromeProcessProfile.cs">ChromeProcessProfile.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MyBaseChromeProfile.cs">MyBaseChromeProfile.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MyBaseChromeProfile.MyBaseProxyServerHandler.cs">MyBaseChromeProfile.MyBaseProxyServerHandler.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="OrbitalProfile.cs">OrbitalProfile.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Enums" TargetFolderName="Enums">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProxyServiceType.cs">ProxyServiceType.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Exceptions" TargetFolderName="Exceptions">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProxyExhaustedException.cs">ProxyExhaustedException.cs</ProjectItem>
+      </Folder>
       <Folder Name="Helpers" TargetFolderName="Helpers" />
+      <Folder Name="Helpers" TargetFolderName="Helpers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="HttpProxyList_ProxyApiWrapper.cs">HttpProxyList_ProxyApiWrapper.cs</ProjectItem>
+      </Folder>
       <Folder Name="UI" TargetFolderName="UI">
         <Folder Name="ViewModels" TargetFolderName="ViewModels">
           <Folder Name="Commands" TargetFolderName="Commands">
@@ -51,6 +70,7 @@
           <ProjectItem ReplaceParameters="true" TargetFileName="EnumCommandVM.cs">EnumCommandVM.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" TargetFileName="EnumCommandDataVM.cs">EnumCommandDataVM.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" TargetFileName="MyLoggerProvider.cs">MyLoggerProvider.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ProxyVM.cs">ProxyVM.cs</ProjectItem>
         </Folder>
         <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml">MainWindow.xaml</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml.cs">MainWindow.xaml.cs</ProjectItem>

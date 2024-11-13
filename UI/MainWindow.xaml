@@ -10,10 +10,14 @@
         xmlns:Xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:WpfUiControl="clr-namespace:TqkLibrary.WpfUi.UserControls;assembly=TqkLibrary.WpfUi"
         xmlns:WpfUiConveter="clr-namespace:TqkLibrary.WpfUi.Converters;assembly=TqkLibrary.WpfUi"
+        xmlns:Enums="clr-namespace:$safeprojectname$.Enums"
         xmlns:st="http://schemas.spicytaco.io/"
         Cursor="{Binding Cursor}"
         mc:Ignorable="d"
-        Title="{Binding WindowTitle}" WindowStartupLocation="CenterScreen" Height="450" Width="800">
+        Title="{Binding WindowTitle}"
+        WindowStartupLocation="CenterScreen"
+        Height="450"
+        Width="800">
     <Window.DataContext>
         <WindowViewModels:MainWVM/>
     </Window.DataContext>
@@ -27,10 +31,129 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Grid.RowSpan="2">
+            <st:StackPanel Orientation="Vertical"
+                    MarginBetweenChildren="5">
 
+                <GroupBox Header="Proxy">
+                    <GroupBox.Resources>
+                        <WpfUiConveter:EnumBooleanConverter x:Key="ProxyServiceTypeEnumBooleanConverter"
+                                                            IsAttributeFlag="True"/>
+                    </GroupBox.Resources>
+
+                    <st:StackPanel Orientation="Vertical"
+                            MarginBetweenChildren="5">
+                        <st:StackPanel Orientation="Horizontal"
+                                MarginBetweenChildren="5">
+                            <TextBlock Text="Số lần sử dụng chung IP"
+                                    VerticalAlignment="Center"/>
+                            <Xceed:IntegerUpDown Value="{Binding ProxyVM.MaxUseCountPerApi}"
+                                                 Minimum="1"
+                                                 Increment="1"/>
+                            <CheckBox Content="Check proxy sống"
+                                      IsChecked="{Binding ProxyVM.IsCheckProxyLive}"
+                                      VerticalAlignment="Center"/>
+                        </st:StackPanel>
+                        <!--<st:StackPanel Orientation="Horizontal" MarginBetweenChildren="5">
+                            <CheckBox Content="Chỉ sử dụng proxy cho các host" VerticalAlignment="Center" IsChecked="{Binding ProxyVM.IsEnableUseProxyOnlyForHost}"/>
+                            <Button Padding="5,3" Command="{Binding ProxyVM.LoadUseProxyOnlyForHostCommand}">
+                                <TextBlock>
+                                    <Run Text="Load ("/>
+                                    <Run Text="{Binding ProxyVM.UseProxyOnlyForHost_Count,Mode=OneWay}"/>
+                                    <Run Text=")"/>
+                                </TextBlock>
+                            </Button>
+                        </st:StackPanel>-->
+                        <st:StackPanel Orientation="Horizontal"
+                                       MarginBetweenChildren="5">
+                            <CheckBox Content="Ngắt các kết nối cũ khi bật tắt/chuyển đổi proxy giữa các host"
+                                      VerticalAlignment="Center"
+                                      IsChecked="{Binding ProxyVM.IsShutdownCurrentConnection}"/>
+                        </st:StackPanel>
+                        <st:StackPanel Orientation="Horizontal"
+                                       MarginBetweenChildren="5">
+                            <CheckBox Content="Dùng proxy để đăng nhập google"
+                                      VerticalAlignment="Center"
+                                      IsChecked="{Binding ProxyVM.IsUseProxyForLoginGoogle}"/>
+                        </st:StackPanel>
+                        <st:StackPanel Orientation="Horizontal"
+                                       MarginBetweenChildren="5">
+                            <CheckBox Content="Dùng proxy cho imap"
+                                      VerticalAlignment="Center"
+                                      IsChecked="{Binding ProxyVM.IsUseProxyForImap}"/>
+                        </st:StackPanel>
+                        <GroupBox>
+                            <GroupBox.Header>
+                                <CheckBox Content="HttpList"
+                                          VerticalAlignment="Center"
+                                          IsChecked="{Binding ProxyVM.ProxyServiceType,
+                                                  Converter={StaticResource ProxyServiceTypeEnumBooleanConverter},
+                                                  ConverterParameter={x:Static Enums:ProxyServiceType.HttpProxyList}}"/>
+                            </GroupBox.Header>
+                            <st:StackPanel Orientation="Vertical"
+                                           MarginBetweenChildren="5">
+                                <st:StackPanel Orientation="Horizontal"
+                                               MarginBetweenChildren="5">
+                                    <Button Padding="5,3"
+                                            Command="{Binding ProxyVM.LoadHttpProxyListCommand}">
+                                        <TextBlock>
+                                <Run Text="Load ("/>
+                                <Run Text="{Binding ProxyVM.HttpProxyList_Count,Mode=OneWay}"/>
+                                <Run Text=")"/>
+                                        </TextBlock>
+                                    </Button>
+                                    <CheckBox IsChecked="{Binding ProxyVM.HttpProxyList_IsDeleteAfterUse}"
+                                              VerticalAlignment="Center"
+                                              Content="Xoá sau sử dụng"/>
+                                    <CheckBox IsChecked="{Binding ProxyVM.HttpProxyList_IsSelectRandom}"
+                                              VerticalAlignment="Center"
+                                              Content="Lựa ngẫu nhiên"/>
+                                </st:StackPanel>
+                            </st:StackPanel>
+                        </GroupBox>
+
+                        <st:StackPanel Orientation="Horizontal"
+                                       MarginBetweenChildren="5">
+                            <CheckBox Content="Tinsoft"
+                                      VerticalAlignment="Center"
+                                      IsChecked="{Binding ProxyVM.ProxyServiceType,
+                                Converter={StaticResource ProxyServiceTypeEnumBooleanConverter},
+                                ConverterParameter={x:Static Enums:ProxyServiceType.TinsoftProxy}}"/>
+                            <Button Padding="5,3"
+                                    Command="{Binding ProxyVM.LoadTinsoftProxyKeyCommand}">
+                                <TextBlock>
+                        <Run Text="Load ("/>
+                        <Run Text="{Binding ProxyVM.TinsoftProxy_KeyCount,Mode=OneWay}"/>
+                        <Run Text=")"/>
+                                </TextBlock>
+                            </Button>
+                        </st:StackPanel>
+
+                        <st:StackPanel Orientation="Horizontal"
+                                       MarginBetweenChildren="5">
+                            <CheckBox Content="ProxyNo1"
+                                      VerticalAlignment="Center"
+                                      IsChecked="{Binding ProxyVM.ProxyServiceType,
+                            Converter={StaticResource ProxyServiceTypeEnumBooleanConverter},
+                            ConverterParameter={x:Static Enums:ProxyServiceType.ProxyNo1}}"/>
+                            <Button Padding="5,3"
+                                    Command="{Binding ProxyVM.LoadProxyNo1ProxyKeyCommand}">
+                                <TextBlock>
+                        <Run Text="Load ("/>
+                        <Run Text="{Binding ProxyVM.ProxyNo1_KeyCount,Mode=OneWay}"/>
+                        <Run Text=")"/>
+                                </TextBlock>
+                            </Button>
+                        </st:StackPanel>
+
+                    </st:StackPanel>
+                </GroupBox>
+
+
+            </st:StackPanel>
 
         </Grid>
-        <ListView Grid.Column="1" Margin="5">
+        <ListView Grid.Column="1"
+                  Margin="5">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
@@ -46,21 +169,31 @@
                 <ContextMenu>
                     <ContextMenu.Resources>
                         <ControlTemplate x:Key="MenuSeparatorTemplate">
-                            <Separator  IsEnabled="False" />
+                            <Separator  IsEnabled="False"/>
                         </ControlTemplate>
-                        <Image x:Key="imgCTX" x:Shared="false" Source="{Binding Path=Image}"/>
+                        <Image x:Key="imgCTX"
+                               x:Shared="false"
+                               Source="{Binding Path=Image}"/>
                     </ContextMenu.Resources>
                     <ContextMenu.ItemContainerStyle>
                         <Style TargetType="{x:Type MenuItem}">
-                            <Setter Property="Header" Value="{Binding Name}" />
-                            <Setter Property="Command" Value="{Binding Command}"/>
-                            <Setter Property="Icon" Value="{StaticResource imgCTX}"/>
-                            <Setter Property="ItemsSource" Value="{Binding Childs}"/>
-                            <Setter Property="Visibility" Value="{Binding Visibility}"/>
-                            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type ListView}},Path=SelectedItems}"/>
+                            <Setter Property="Header"
+                                    Value="{Binding Name}"/>
+                            <Setter Property="Command"
+                                    Value="{Binding Command}"/>
+                            <Setter Property="Icon"
+                                    Value="{StaticResource imgCTX}"/>
+                            <Setter Property="ItemsSource"
+                                    Value="{Binding Childs}"/>
+                            <Setter Property="Visibility"
+                                    Value="{Binding Visibility}"/>
+                            <Setter Property="CommandParameter"
+                                    Value="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type ListView}},Path=SelectedItems}"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding ''}" Value="{x:Null}">
-                                    <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
+                                <DataTrigger Binding="{Binding ''}"
+                                             Value="{x:Null}">
+                                    <Setter Property="Template"
+                                            Value="{StaticResource MenuSeparatorTemplate}"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -69,19 +202,28 @@
             </ListView.ContextMenu>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Height" Value="22"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Height"
+                            Value="22"/>
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment"
+                            Value="Stretch"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <ListView Grid.Column="1" Margin="5" Grid.Row="1" ItemsSource="{Binding Logs}">
+        <ListView Grid.Column="1"
+                  Margin="5"
+                  Grid.Row="1"
+                  ItemsSource="{Binding Logs}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Logs" Width="500">
+                    <GridViewColumn Header="Logs"
+                                    Width="500">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" ToolTip="{Binding}" TextWrapping="NoWrap"/>
+                                <TextBlock Text="{Binding}"
+                                           ToolTip="{Binding}"
+                                           TextWrapping="NoWrap"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -89,9 +231,12 @@
             </ListView.View>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="MaxHeight" Value="60"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="MaxHeight"
+                            Value="60"/>
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment"
+                            Value="Stretch"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
