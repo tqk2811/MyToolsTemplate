@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using TqkLibrary.WpfUi;
 using TqkLibrary.WpfUi.ObservableCollections;
 
 namespace $safeprojectname$.UI.ViewModels
