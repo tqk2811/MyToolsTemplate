@@ -1,5 +1,5 @@
 using System;
-using TqkLibrary.WpfUi.ObservableCollections;
+using TqkLibrary.WpfUi.Interfaces;
 
 namespace $safeprojectname$.UI.ViewModels
 {
