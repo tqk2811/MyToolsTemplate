@@ -41,7 +41,7 @@
       <Folder Name="Exceptions" TargetFolderName="Exceptions">
         <ProjectItem ReplaceParameters="true" TargetFileName="ProxyExhaustedException.cs">ProxyExhaustedException.cs</ProjectItem>
       </Folder>
-      <Folder Name="Helpers" TargetFolderName="Helpers">
+      <Folder Name="Services" TargetFolderName="Services">
         <ProjectItem ReplaceParameters="true" TargetFileName="HttpProxyList_ProxyApiWrapper.cs">HttpProxyList_ProxyApiWrapper.cs</ProjectItem>
       </Folder>
       <Folder Name="UI" TargetFolderName="UI">
