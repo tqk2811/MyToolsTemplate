@@ -1,15 +1,12 @@
-<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005"
-  Type="Project">
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>MyToolsTemplate_Selenium</Name>
-    <Description>
-    </Description>
+    <Name>MyToolsTemplateSelenium</Name>
+    <Description>MyToolsTemplateSelenium</Description>
     <ProjectType>CSharp</ProjectType>
-    <ProjectSubType>
-    </ProjectSubType>
+    <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>MyToolsTemplate</DefaultName>
+    <DefaultName>MyToolsTemplateSelenium</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
@@ -17,8 +14,7 @@
     <Icon>__TemplateIcon.ico</Icon>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="MyToolsTemplate.csproj" File="MyToolsTemplate.csproj"
-      ReplaceParameters="true">
+    <Project TargetFileName="MyToolsTemplate.csproj" File="MyToolsTemplate.csproj" ReplaceParameters="true">
       <Folder Name="Attributes" TargetFolderName="Attributes">
         <ProjectItem ReplaceParameters="true" TargetFileName="NameAttribute.cs">NameAttribute.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="ImageResourceAttribute.cs">ImageResourceAttribute.cs</ProjectItem>
@@ -31,7 +27,7 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="UiSettingData.cs">UiSettingData.cs</ProjectItem>
       </Folder>
       <Folder Name="Resources" TargetFolderName="Resources">
-        <ProjectItem ReplaceParameters="true" TargetFileName="Preferences.json">Preferences.jsons</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Preferences.json">Preferences.json</ProjectItem>
       </Folder>
       <Folder Name="SeleniumProfiles" TargetFolderName="SeleniumProfiles">
         <ProjectItem ReplaceParameters="true" TargetFileName="ChromeProcessProfile.cs">ChromeProcessProfile.cs</ProjectItem>
@@ -45,7 +41,6 @@
       <Folder Name="Exceptions" TargetFolderName="Exceptions">
         <ProjectItem ReplaceParameters="true" TargetFileName="ProxyExhaustedException.cs">ProxyExhaustedException.cs</ProjectItem>
       </Folder>
-      <Folder Name="Helpers" TargetFolderName="Helpers" />
       <Folder Name="Helpers" TargetFolderName="Helpers">
         <ProjectItem ReplaceParameters="true" TargetFileName="HttpProxyList_ProxyApiWrapper.cs">HttpProxyList_ProxyApiWrapper.cs</ProjectItem>
       </Folder>
