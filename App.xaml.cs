@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Globalization;
 using TqkLibrary.WpfUi;
+using System.CommandLine;
+using $safeprojectname$.UI;
 
 namespace $safeprojectname$
 {
@@ -26,6 +28,25 @@ namespace $safeprojectname$
                 MessageBox.Show("Hãy giải nén ra để chạy", "Thông báo");
                 Environment.Exit(-1);
             }
+            
+            RootCommand rootCommand = new RootCommand("ViewYoutube.Manager.App")
+            {
+
+            };
+            rootCommand.SetHandler(WorkAsync);
+            rootCommand.InvokeAsync(e.Args).ContinueWith(Shutdown);
+        }
+
+        private async void Shutdown(Task<int> task)
+        {
+            this.Shutdown(await task);
+        }
+
+        private Task WorkAsync()
+        {
+            Window window = new MainWindow();
+            window.ShowDialog();
+            return Task.CompletedTask;
         }
     }
 }
