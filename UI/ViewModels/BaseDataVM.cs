@@ -6,12 +6,13 @@ namespace $safeprojectname$.UI.ViewModels
     internal class BaseDataVM<TData> : BaseVM, IViewModel<TData> where TData : class
     {
         readonly Action? _saveCallback;
+        TData _data;
         public event ChangeCallBack<TData>? Change;
-        public TData Data { get; }
+        public virtual TData Data { get { return _data; } }
 
         public BaseDataVM(TData data)
         {
-            Data = data ?? throw new ArgumentNullException(nameof(data));
+            _data = data ?? throw new ArgumentNullException(nameof(data));
         }
         public BaseDataVM(TData data, Action saveCallback) : this(data)
         {
@@ -22,6 +23,11 @@ namespace $safeprojectname$.UI.ViewModels
         {
             _saveCallback?.Invoke();
             Change?.Invoke(this, Data);
+        }
+        
+        public virtual void Update(TData data)
+        {
+            this._data = data ?? throw new ArgumentNullException(nameof(data));
         }
     }
 }
