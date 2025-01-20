@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -41,6 +42,26 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         {
             get { return _Path; }
             set { _Path = value; NotifyPropertyChange(); OnPathSelected?.Invoke(value); }
+        }
+
+        public virtual string? Name
+        {
+            get
+            {
+                if (File.Exists(Path))
+                {
+                    return new FileInfo(Path).Name;
+                }
+                if (Directory.Exists(Path))
+                {
+                    return new DirectoryInfo(Path).Name;
+                }
+                return null;
+            }
+        }
+        public virtual bool IsExist
+        {
+            get { return File.Exists(Path) || Directory.Exists(Path); }
         }
 
         public override bool CanExecute(object? parameter)
@@ -85,9 +106,9 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             get { return _expression.Compile().Invoke(_object); }
             set
             {
-                base.Path = value;
                 var prop = (PropertyInfo)((MemberExpression)_expression.Body).Member;
                 prop.SetValue(_object, value);
+                base.Path = value;
                 NotifyPropertyChange();
                 _saveCallback.Invoke();
                 OnPathSelected?.Invoke(value);
