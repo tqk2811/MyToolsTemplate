@@ -34,6 +34,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             if (pathCallback is not null)
                 OnPathSelected += pathCallback;
             this._canExecute = canExecute;
+            this.ClearPathCommand = canExecute is not null ? new BaseCommand(_ClearPath, canExecute) : new BaseCommand(_ClearPath);
         }
 
         public virtual event Action<string?>? OnPathSelected;
@@ -76,6 +77,13 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         }
 
         public static implicit operator string?(BaseDialogCommand baseDialogCommand) => baseDialogCommand?.Path;
+
+        
+        public virtual BaseCommand? ClearPathCommand { get; }
+        protected virtual void _ClearPath()
+        {
+            Path = null;
+        }
     }
     internal abstract class BaseDialogCommand<TObject> : BaseDialogCommand
     {
