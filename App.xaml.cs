@@ -29,7 +29,7 @@ namespace $safeprojectname$
                 Environment.Exit(-1);
             }
             
-            RootCommand rootCommand = new RootCommand("ViewYoutube.Manager.App")
+            RootCommand rootCommand = new RootCommand("$safeprojectname$")
             {
 
             };
