@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net8.0-windows7.0</TargetFrameworks>
+		<TargetFrameworks>net8.0-windows10.0.17763</TargetFrameworks>
 		<LangVersion>12.0</LangVersion>
 		<UseWPF>true</UseWPF>
 		<Nullable>enable</Nullable>
@@ -38,7 +38,7 @@
 		<PackageReference Include="TqkLibrary.Proxy" Version="1.0.0-build20240727163214" />
 		<PackageReference Include="TqkLibrary.SeleniumSupport" Version="1.0.0-build20240616130145" />
 		<PackageReference Include="TqkLibrary.Utils" Version="1.0.0-build20240415170434" />
-		<PackageReference Include="TqkLibrary.WinApi" Version="1.0.0-build20241112190453" />
+		<PackageReference Include="TqkLibrary.WinApi" Version="1.0.0-build20250220173957" />
 		<!-- <PackageReference Include="TqkLibrary.Queues" Version="1.0.0-build20240416101957" /> -->
 		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20240628170930" />
 	</ItemGroup>
