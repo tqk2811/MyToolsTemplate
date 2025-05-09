@@ -1,8 +1,10 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace $safeprojectname$.UI.ViewModels.Commands
@@ -114,12 +116,64 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             get { return _expression.Compile().Invoke(_object); }
             set
             {
-                var prop = (PropertyInfo)((MemberExpression)_expression.Body).Member;
-                prop.SetValue(_object, value);
                 base.Path = value;
+                // var prop = (PropertyInfo)((MemberExpression)_expression.Body).Member;
+                // prop.SetValue(_object, value);
+                SetProperty(value);
                 NotifyPropertyChange();
                 _saveCallback.Invoke();
                 OnPathSelected?.Invoke(value);
+            }
+        }
+        
+        void SetProperty(string? value)
+        {
+            MemberExpression? memberExpression = _expression.Body as MemberExpression;
+            if (memberExpression is null) throw new InvalidOperationException();
+
+            List<MemberExpression> listMemberExpression = new([memberExpression]);//child to parent
+            while (true)
+            {
+                if (memberExpression?.Expression is null)
+                {
+                    break;
+                }
+                else
+                {
+#if DEBUG
+                    Type type = memberExpression.Expression.GetType();
+#endif
+                    MemberExpression? child_memberExpression = memberExpression?.Expression as MemberExpression;
+                    if (child_memberExpression is null) throw new InvalidOperationException();
+
+                    memberExpression = child_memberExpression;
+                    listMemberExpression.Add(child_memberExpression);
+                }
+            }
+            listMemberExpression.Reverse();
+
+
+            object? _target = _object;
+            foreach (MemberExpression member in listMemberExpression)
+            {
+                PropertyInfo? propertyInfo = member?.Member as PropertyInfo;
+                if (propertyInfo is not null)
+                {
+                    if (listMemberExpression.Last().Equals(member))
+                    {
+                        if (propertyInfo.CanWrite)
+                        {
+                            propertyInfo.SetValue(_target, value);
+                        }
+                        break;
+                    }
+                    else if (propertyInfo.CanRead)
+                    {
+                        _target = propertyInfo.GetValue(_target);
+                    }
+                    else throw new InvalidOperationException();
+                }
+                else throw new InvalidOperationException();
             }
         }
     }
