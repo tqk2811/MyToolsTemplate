@@ -131,6 +131,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             MemberExpression? memberExpression = _expression.Body as MemberExpression;
             if (memberExpression is null) throw new InvalidOperationException();
 
+            
             List<MemberExpression> listMemberExpression = new([memberExpression]);//child to parent
             while (true)
             {
@@ -138,17 +139,19 @@ namespace $safeprojectname$.UI.ViewModels.Commands
                 {
                     break;
                 }
-                else
-                {
 #if DEBUG
-                    Type type = memberExpression.Expression.GetType();
+                Type type = memberExpression.Expression.GetType();
 #endif
-                    MemberExpression? child_memberExpression = memberExpression?.Expression as MemberExpression;
-                    if (child_memberExpression is null) throw new InvalidOperationException();
-
+                if (memberExpression.Expression is MemberExpression child_memberExpression)
+                {
                     memberExpression = child_memberExpression;
                     listMemberExpression.Add(child_memberExpression);
                 }
+                else if (memberExpression.Expression is ParameterExpression typedParameterExpression)
+                {
+                    break;
+                }
+                else throw new InvalidOperationException();
             }
             listMemberExpression.Reverse();
 
