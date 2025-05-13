@@ -19,8 +19,6 @@ namespace $safeprojectname$.UI.ViewModels.WindowViewModels
 
 
 
-        public LimitObservableCollection<string> Logs { get { return _Logs; } } 
-        public static ILoggerProvider LoggerProvider { get { return _Logs; } }        
-		private static readonly MyLoggerProviderVM _Logs = new MyLoggerProviderVM();
+        public LimitObservableCollection<string> Logs { get { return Singleton.Logs; } } 
     }
 }
