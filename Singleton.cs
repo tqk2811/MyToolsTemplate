@@ -20,13 +20,15 @@ namespace $safeprojectname$
         static Singleton()
         {
             Directory.CreateDirectory(LogDir);
+            Logs = new MyLoggerProviderVM(() => LogDir + $"\\{DateTime.Now:yyyy-MM-dd HH}.log");
+            ILoggerFactory = LoggerFactory.Create(c => c.AddProvider(Logs));
+
             Directory.CreateDirectory(UserDataDirs);
             Directory.CreateDirectory(ChromeDriversDir);
             JsonSerializerSettings = new JsonSerializerSettings();
             JsonSerializerSettings.Converters.Add(new StringEnumConverter());
             Setting = new SaveJsonData<SettingData>(SettingJson, JsonSerializerSettings);
-            UiSetting = new SaveJsonData<UiSettingData>(UiSettingJson, JsonSerializerSettings);            
-            ILoggerFactory = LoggerFactory.Create(c => c.AddProvider(MainWVM.LoggerProvider));
+            UiSetting = new SaveJsonData<UiSettingData>(UiSettingJson, JsonSerializerSettings);
         }
         internal static string ExeDir { get; } = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory!.FullName;//Directory.GetCurrentDirectory();
         internal static string LogDir { get; } = Path.Combine(ExeDir, "Logs");
@@ -35,7 +37,8 @@ namespace $safeprojectname$
         internal static string UiSettingJson { get; } = Path.Combine(ExeDir, "UiSetting.json");
         internal static string UserDataDirs { get; } = Path.Combine(ExeDir, "UserDataDirs");
         internal static string ChromeDriversDir { get; } = Path.Combine(ExeDir, "ChromeDriversDir");
-
+        
+		internal static MyLoggerProviderVM Logs { get; }
         internal static JsonSerializerSettings JsonSerializerSettings { get; }
         internal static ILoggerFactory ILoggerFactory { get; set; }
         internal static SaveJsonData<SettingData> Setting { get; }

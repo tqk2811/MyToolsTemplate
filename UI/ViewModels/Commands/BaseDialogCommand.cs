@@ -1,7 +1,10 @@
 using System;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace $safeprojectname$.UI.ViewModels.Commands
@@ -33,6 +36,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             if (pathCallback is not null)
                 OnPathSelected += pathCallback;
             this._canExecute = canExecute;
+            this.ClearPathCommand = canExecute is not null ? new BaseCommand(_ClearPath, canExecute) : new BaseCommand(_ClearPath);
         }
 
         public virtual event Action<string?>? OnPathSelected;
@@ -40,8 +44,35 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         public virtual string? Path
         {
             get { return _Path; }
-            set { _Path = value; NotifyPropertyChange(); OnPathSelected?.Invoke(value); }
+            set { _Path = value; NotifyChange(); OnPathSelected?.Invoke(value); }
         }
+
+        public virtual string? Name
+        {
+            get
+            {
+                if (File.Exists(Path))
+                {
+                    return new FileInfo(Path).Name;
+                }
+                if (Directory.Exists(Path))
+                {
+                    return new DirectoryInfo(Path).Name;
+                }
+                return null;
+            }
+        }
+        public virtual bool IsExist
+        {
+            get { return File.Exists(Path) || Directory.Exists(Path); }
+        }
+        public void NotifyChange()
+        {
+            NotifyPropertyChange(nameof(Path));
+            NotifyPropertyChange(nameof(Name));
+            NotifyPropertyChange(nameof(IsExist));
+        }
+
 
         public override bool CanExecute(object? parameter)
         {
@@ -55,6 +86,13 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         }
 
         public static implicit operator string?(BaseDialogCommand baseDialogCommand) => baseDialogCommand?.Path;
+
+        
+        public virtual BaseCommand? ClearPathCommand { get; }
+        protected virtual void _ClearPath()
+        {
+            Path = null;
+        }
     }
     internal abstract class BaseDialogCommand<TObject> : BaseDialogCommand
     {
@@ -85,12 +123,67 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             get { return _expression.Compile().Invoke(_object); }
             set
             {
-                base.Path = value;
                 var prop = (PropertyInfo)((MemberExpression)_expression.Body).Member;
                 prop.SetValue(_object, value);
-                NotifyPropertyChange();
+                // SetProperty(value);
+                base.Path = value;
+                NotifyChange();
                 _saveCallback.Invoke();
                 OnPathSelected?.Invoke(value);
+            }
+        }
+        
+        void SetProperty(string? value)
+        {
+            MemberExpression? memberExpression = _expression.Body as MemberExpression;
+            if (memberExpression is null) throw new InvalidOperationException();
+
+            
+            List<MemberExpression> listMemberExpression = new([memberExpression]);//child to parent
+            while (true)
+            {
+                if (memberExpression?.Expression is null)
+                {
+                    break;
+                }
+#if DEBUG
+                Type type = memberExpression.Expression.GetType();
+#endif
+                if (memberExpression.Expression is MemberExpression child_memberExpression)
+                {
+                    memberExpression = child_memberExpression;
+                    listMemberExpression.Add(child_memberExpression);
+                }
+                else if (memberExpression.Expression is ParameterExpression typedParameterExpression)
+                {
+                    break;
+                }
+                else throw new InvalidOperationException();
+            }
+            listMemberExpression.Reverse();
+
+
+            object? _target = _object;
+            foreach (MemberExpression member in listMemberExpression)
+            {
+                PropertyInfo? propertyInfo = member?.Member as PropertyInfo;
+                if (propertyInfo is not null)
+                {
+                    if (listMemberExpression.Last().Equals(member))
+                    {
+                        if (propertyInfo.CanWrite)
+                        {
+                            propertyInfo.SetValue(_target, value);
+                        }
+                        break;
+                    }
+                    else if (propertyInfo.CanRead)
+                    {
+                        _target = propertyInfo.GetValue(_target);
+                    }
+                    else throw new InvalidOperationException();
+                }
+                else throw new InvalidOperationException();
             }
         }
     }

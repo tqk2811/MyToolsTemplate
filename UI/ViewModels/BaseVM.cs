@@ -36,6 +36,14 @@ namespace $safeprojectname$.UI.ViewModels
             set { _Visibility = value; NotifyPropertyChange(); }
         }
 
+        public virtual void RefreshAll()
+        {
+            foreach (var item in GetType().GetProperties())
+            {
+                NotifyPropertyChange(item.Name);
+            }
+        }
+
         public BaseCommand<string> CopyTextCommand { get; }
         void _CopyTextCommand(string text)
         {

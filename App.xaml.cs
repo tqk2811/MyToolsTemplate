@@ -36,7 +36,7 @@ namespace $safeprojectname$
 
             };
             rootCommand.SetHandler(WorkAsync);
-            rootCommand.InvokeAsync(e.Args).ContinueWith(Shutdown);
+            rootCommand.InvokeAsync(e.Args).ContinueWith(Shutdown, TaskContinuationOptions.ExecuteSynchronously);
         }
 
         private async void Shutdown(Task<int> task)
