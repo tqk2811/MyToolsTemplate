@@ -44,7 +44,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         public virtual string? Path
         {
             get { return _Path; }
-            set { _Path = value; NotifyPropertyChange(); OnPathSelected?.Invoke(value); }
+            set { _Path = value; NotifyChange(); OnPathSelected?.Invoke(value); }
         }
 
         public virtual string? Name
@@ -66,6 +66,13 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         {
             get { return File.Exists(Path) || Directory.Exists(Path); }
         }
+        public void NotifyChange()
+        {
+            NotifyPropertyChange(nameof(Path));
+            NotifyPropertyChange(nameof(Name));
+            NotifyPropertyChange(nameof(IsExist));
+        }
+
 
         public override bool CanExecute(object? parameter)
         {
@@ -116,11 +123,11 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             get { return _expression.Compile().Invoke(_object); }
             set
             {
+                var prop = (PropertyInfo)((MemberExpression)_expression.Body).Member;
+                prop.SetValue(_object, value);
+                // SetProperty(value);
                 base.Path = value;
-                // var prop = (PropertyInfo)((MemberExpression)_expression.Body).Member;
-                // prop.SetValue(_object, value);
-                SetProperty(value);
-                NotifyPropertyChange();
+                NotifyChange();
                 _saveCallback.Invoke();
                 OnPathSelected?.Invoke(value);
             }
