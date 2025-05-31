@@ -1,4 +1,5 @@
 ﻿using $safeprojectname$.DataClass;
+using $safeprojectname$.UI.ViewModels;
 using $safeprojectname$.UI.ViewModels.WindowViewModels;
 using System;
 using System.Collections.Generic;
