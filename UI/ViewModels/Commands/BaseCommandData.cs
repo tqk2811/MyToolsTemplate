@@ -15,22 +15,25 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         {
             this._data = data ?? throw new ArgumentNullException(nameof(data));
         }
-        public BaseCommandData(TData data, Action<TData> execute) : this(data, execute, (d) => true)
+        public BaseCommandData(TData data, Action<TData>? execute = null) : this(data, execute, (d) => true)
         {
         }
-        public BaseCommandData(TData data, Action<TData> execute, Func<TData, bool> canExecute) : this(data, execute, canExecute, App.Current.Dispatcher)
+        public BaseCommandData(TData data, Action<TData>? execute, Func<TData, bool> canExecute) : this(data, execute, canExecute, App.Current.Dispatcher)
         {
         }
-        public BaseCommandData(TData data, Action<TData> execute, Func<TData, bool> canExecute, Dispatcher dispatcher) : base(dispatcher)
+        public BaseCommandData(TData data, Action<TData>? execute, Func<TData, bool> canExecute, Dispatcher dispatcher) : base(dispatcher)
         {
             this._data = data ?? throw new ArgumentNullException(nameof(data));
             this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this._canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
+            if (execute is not null)
+            {
+                OnExecute += execute;
+            }
         }
 
         protected readonly TData _data;
         readonly Func<TData, bool>? _canExecute;
-        readonly Action<TData>? _execute;
+        public new event Action<TData>? OnExecute;
 
         public override bool CanExecute(object? parameter)
         {
@@ -39,29 +42,31 @@ namespace $safeprojectname$.UI.ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            _execute?.Invoke(_data);
+            OnExecute?.Invoke(_data);
         }
     }
 
     internal class BaseCommandData<TData, TParam> : BaseCommandData<TData>
     {
-        public BaseCommandData(TData data, Action<TData, TParam> execute) : this(data, execute, (d, p) => true)
+        public BaseCommandData(TData data, Action<TData, TParam>? execute = null) : this(data, execute, (d, p) => true)
         {
         }
-        public BaseCommandData(TData data, Action<TData, TParam> execute, Func<TData, TParam, bool> canExecute) : this(data, execute, canExecute, App.Current.Dispatcher)
+        public BaseCommandData(TData data, Action<TData, TParam>? execute, Func<TData, TParam, bool> canExecute) : this(data, execute, canExecute, App.Current.Dispatcher)
         {
 
         }
-        public BaseCommandData(TData data, Action<TData, TParam> execute, Func<TData, TParam, bool> canExecute, Dispatcher dispatcher)
+        public BaseCommandData(TData data, Action<TData, TParam>? execute, Func<TData, TParam, bool> canExecute, Dispatcher dispatcher)
             : base(data, dispatcher)
         {
             this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this._canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
+            if (execute is not null)
+            {
+                OnExecute += execute;
+            }
         }
 
         readonly Func<TData, TParam, bool> _canExecute;
-        readonly Action<TData, TParam> _execute;
-
+        public new event Action<TData, TParam>? OnExecute;
 
         public override bool CanExecute(object? parameter)
         {
@@ -70,7 +75,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            _execute?.Invoke(_data, (TParam)parameter!);
+            OnExecute?.Invoke(_data, (TParam)parameter!);
         }
     }
 }

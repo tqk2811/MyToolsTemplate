@@ -17,25 +17,29 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             this._dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
         }
 
-        public BaseCommand(Action execute) : this(execute, () => true)
+        public BaseCommand(Action? execute = null) : this(execute, () => true)
         {
         }
         public BaseCommand(Func<bool> canExecute) : this(() => { }, canExecute)
         {
         }
-        public BaseCommand(Action execute, Func<bool> canExecute) : this(execute, canExecute, App.Current.Dispatcher)
+        public BaseCommand(Action? execute, Func<bool> canExecute) : this(execute, canExecute, App.Current.Dispatcher)
         {
         }
-        public BaseCommand(Action execute, Func<bool> canExecute, Dispatcher dispatcher)
+        public BaseCommand(Action? execute, Func<bool> canExecute, Dispatcher dispatcher)
         {
-            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this._canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
             this._dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
+            if (execute is not null)
+            {
+                this.OnExecute += execute;
+            }
         }
 
         readonly Func<bool>? _canExecute;
-        readonly Action? _execute;
-
+        public event Action? OnExecute;
+        public event EventHandler? CanExecuteChanged;
+        
         public virtual bool CanExecute(object? parameter)
         {
             return _canExecute?.Invoke() ?? true;
@@ -43,10 +47,9 @@ namespace $safeprojectname$.UI.ViewModels.Commands
 
         public virtual void Execute(object? parameter)
         {
-            _execute?.Invoke();
+            OnExecute?.Invoke();
         }
 
-        public event EventHandler? CanExecuteChanged;
         public virtual void FireCanExecuteChanged(object? sender, EventArgs e)
         {
             _dispatcher.TrueThreadInvokeAsync(() => CanExecuteChanged?.Invoke(sender, e));
@@ -55,17 +58,21 @@ namespace $safeprojectname$.UI.ViewModels.Commands
     }
     internal class BaseCommand<TParam> : BaseCommand
     {
-        public BaseCommand(Action<TParam> execute) : this(execute, (p) => true)
+        public BaseCommand(Action<TParam>? execute = null) : this(execute, (p) => true)
         {
         }
-        public BaseCommand(Action<TParam> execute, Func<TParam, bool> canExecute)
+        public BaseCommand(Action<TParam>? execute, Func<TParam, bool> canExecute)
         {
-            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this._canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
+            if (execute is not null)
+            {
+                OnExecute += execute;
+            }
         }
 
         readonly Func<TParam, bool> _canExecute;
-        readonly Action<TParam> _execute;
+        public new event Action<TParam>? OnExecute;
+        
 
         public override bool CanExecute(object? parameter)
         {
@@ -74,7 +81,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            _execute?.Invoke((TParam)parameter!);
+            OnExecute?.Invoke((TParam)parameter!);
         }
     }
 }
