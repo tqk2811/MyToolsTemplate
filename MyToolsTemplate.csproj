@@ -36,7 +36,7 @@
 		<PackageReference Include="TqkLibrary.Linq" Version="1.0.0-build20240325150111" />
 		<PackageReference Include="TqkLibrary.Utils" Version="1.0.0-build20240415170434" />
 		<!-- <PackageReference Include="TqkLibrary.Queues" Version="1.0.0-build20240416101957" /> -->
-		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20240628170930" />
+		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20250701164800" />
 	</ItemGroup>
 
 

@@ -43,20 +43,19 @@ namespace $safeprojectname$.UI.ViewModels
 
             public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
             {
-                if (!IsEnabled(logLevel))
-                {
-                    return;
-                }
+                bool isInsert = IsEnabled(logLevel);
 
                 string time = DateTime.Now.ToString("HH:mm:ss");
+                string log;
                 if (exception is not null)
                 {
-                    _myLoggerProvider.AddAsync($"{time} [{logLevel,-12}] {_categoryName} {state} - {exception.GetType().FullName}: {exception.Message}\r\n{exception.StackTrace}");
+                    log = $"{time} [{logLevel,-12}] {_categoryName} {state} - {exception.GetType().FullName}: {exception.Message}\r\n{exception.StackTrace}";
                 }
                 else
                 {
-                    _myLoggerProvider.AddAsync($"{time} [{logLevel,-12}] {_categoryName} - {formatter(state, exception)}");
+                    log = $"{time} [{logLevel,-12}] {_categoryName} - {formatter(state, exception)}";
                 }
+                _myLoggerProvider.AddAsync(log, isInsert);
             }
         }
     }
