@@ -39,9 +39,10 @@ namespace $safeprojectname$.UI.ViewModels.Commands
         readonly Func<bool>? _canExecute;
         public event Action? OnExecute;
         public event EventHandler? CanExecuteChanged;
-        
+
         public virtual bool CanExecute(object? parameter)
         {
+            if (_isForceLock) return false;
             return _canExecute?.Invoke() ?? true;
         }
 
@@ -55,6 +56,40 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             _dispatcher.TrueThreadInvokeAsync(() => CanExecuteChanged?.Invoke(sender, e));
         }
         public virtual void FireCanExecuteChanged() => FireCanExecuteChanged(null, EventArgs.Empty);
+            
+            
+        public virtual IDisposable LockButton() => new ButtonDisposable(this);
+        bool _isForceLock = false;
+        void _ForceLock()
+        {
+            if (_isForceLock) throw new InvalidOperationException($"This button was locked");
+            _isForceLock = true;
+            FireCanExecuteChanged();
+        }
+        void _ForceRelease()
+        {
+            if (!_isForceLock) throw new InvalidOperationException($"This button was unlocked");
+            _isForceLock = false;
+            FireCanExecuteChanged();
+        }
+        class ButtonDisposable : IDisposable
+        {
+            readonly BaseCommand _baseCommand;
+            public ButtonDisposable(BaseCommand baseCommand)
+            {
+                this._baseCommand = baseCommand ?? throw new ArgumentNullException(nameof(baseCommand));
+                this._baseCommand._ForceLock();
+            }
+            ~ButtonDisposable()
+            {
+                this._baseCommand._ForceRelease();
+            }
+            public void Dispose()
+            {
+                this._baseCommand._ForceRelease();
+                GC.SuppressFinalize(this);
+            }
+        }
     }
     internal class BaseCommand<TParam> : BaseCommand
     {
