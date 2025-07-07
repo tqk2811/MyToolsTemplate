@@ -42,7 +42,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
 
         public virtual bool CanExecute(object? parameter)
         {
-            if (_isForceLock) return false;
+            if (IsForceLock) return false;
             return _canExecute?.Invoke() ?? true;
         }
 
