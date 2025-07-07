@@ -112,6 +112,7 @@ namespace $safeprojectname$.UI.ViewModels.Commands
 
         public override bool CanExecute(object? parameter)
         {
+            if (IsForceLock) return false;
             return _canExecute.Invoke((TParam)parameter!);
         }
 
