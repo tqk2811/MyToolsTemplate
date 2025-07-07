@@ -59,35 +59,36 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             
             
         public virtual IDisposable LockButton() => new ButtonDisposable(this);
-        bool _isForceLock = false;
-        void _ForceLock()
-        {
-            if (_isForceLock) throw new InvalidOperationException($"This button was locked");
-            _isForceLock = true;
-            FireCanExecuteChanged();
-        }
-        void _ForceRelease()
-        {
-            if (!_isForceLock) throw new InvalidOperationException($"This button was unlocked");
-            _isForceLock = false;
-            FireCanExecuteChanged();
-        }
-        class ButtonDisposable : IDisposable
+        
+        protected bool IsForceLock { get; private set; } = false;
+        private class ButtonDisposable : IDisposable
         {
             readonly BaseCommand _baseCommand;
             public ButtonDisposable(BaseCommand baseCommand)
             {
                 this._baseCommand = baseCommand ?? throw new ArgumentNullException(nameof(baseCommand));
-                this._baseCommand._ForceLock();
+                _ForceLock();
             }
             ~ButtonDisposable()
             {
-                this._baseCommand._ForceRelease();
+                _ForceRelease();
             }
             public void Dispose()
             {
-                this._baseCommand._ForceRelease();
+                _ForceRelease();
                 GC.SuppressFinalize(this);
+            }
+            void _ForceLock()
+            {
+                if (this._baseCommand.IsForceLock) throw new InvalidOperationException($"This button was locked");
+                this._baseCommand.IsForceLock = true;
+                this._baseCommand.FireCanExecuteChanged();
+            }
+            void _ForceRelease()
+            {
+                if (!this._baseCommand.IsForceLock) throw new InvalidOperationException($"This button was unlocked");
+                this._baseCommand.IsForceLock = false;
+                this._baseCommand.FireCanExecuteChanged();
             }
         }
     }
