@@ -19,4 +19,14 @@ namespace $safeprojectname$.UI.ViewModels.Commands
             this._func_window.Invoke().ShowDialog();
         }
     }
+    internal class OpenWindowCommand<TWindow> : OpenWindowCommand
+        where TWindow : Window, new()
+    {
+        public OpenWindowCommand() : base(() => new TWindow())
+        {
+        }
+        public OpenWindowCommand(Func<bool> canExecute) : base(() => new TWindow(), canExecute)
+        {
+        }
+    }
 }
