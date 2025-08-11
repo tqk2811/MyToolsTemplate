@@ -32,14 +32,31 @@ namespace $safeprojectname$
             RootCommand rootCommand = new RootCommand("ViewYoutube.Manager.App")
             {
 
-            };
-            rootCommand.SetHandler(WorkAsync);
-            rootCommand.InvokeAsync(e.Args).ContinueWith(Shutdown, TaskContinuationOptions.ExecuteSynchronously);
+            };            
+            ParseResult parseResult = rootCommand.Parse(e.Args);
+            if (parseResult.Errors.Any())
+            {
+                foreach (var item in parseResult.Errors)
+                {
+                    Console.WriteLine($"{item.Message}");
+                }
+                Shutdown(1);
+            }
+            else
+            {
+                Work();
+            }
         }
 
-        private async void Shutdown(Task<int> task)
+        private void Work()
         {
-            this.Shutdown(await task);
+            Window window = new MainWindow();
+            window.Closed += Window_Closed;
+            window.Show();
+        }
+        private void Window_Closed(object? sender, EventArgs e)
+        {
+            this.Shutdown(0);
         }
 
         private Task WorkAsync()
