@@ -1,9 +1,5 @@
 ﻿using $safeprojectname$.Enums;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace $safeprojectname$.DataClass
 {
@@ -16,7 +12,8 @@ namespace $safeprojectname$.DataClass
         public List<string> UseProxyOnlyForHostList { get; set; } = new();
         public bool IsCheckProxyLive { get; set; } = true;
         public ProxyServiceType ProxyServiceType { get; set; }
-        public Dictionary<ProxyServiceType, DictConfigureData> ProxyServiceConfigure { get; set; } = new Dictionary<ProxyServiceType, DictConfigureData>();
+        public ProxyListData ProxyListData { get; set; } = new();
+        public Dictionary<ProxyServiceType, List<string>> ProxyApiKeys { get; set; } = new Dictionary<ProxyServiceType, List<string>>();
         public int MaxUseCountPerApi { get; set; } = 1;
     }
 }

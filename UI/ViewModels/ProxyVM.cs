@@ -22,10 +22,10 @@ namespace $safeprojectname$.UI.ViewModels
             this.LoadTinsoftProxyKeyCommand = new OpenFileDialogCommand("txt file|*.txt|All file|*.*", _LoadTinsoftProxyKeyCommand);
             this.LoadUseProxyOnlyForHostCommand = new OpenFileDialogCommand("txt file|*.txt|All file|*.*", _LoadUseProxyOnlyForHostCommand);
             this.LoadProxyNo1ProxyKeyCommand = new OpenFileDialogCommand("txt file|*.txt|All file|*.*", _LoadProxyNo1ProxyKeyCommand);
-            foreach (var item in Enum.GetValues<ProxyServiceType>().Except(ProxyServiceType.None))
+            foreach (var item in Enum.GetValues<ProxyServiceType>().Except(ProxyServiceType.None, ProxyServiceType.ProxyList))
             {
-                if (!data.ProxyServiceConfigure.ContainsKey(item))
-                    data.ProxyServiceConfigure[item] = new();
+                if (!data.ProxyApiKeys.ContainsKey(item))
+                    data.ProxyApiKeys[item] = new();
             }
         }
 
@@ -104,27 +104,28 @@ namespace $safeprojectname$.UI.ViewModels
             NotifyPropertyChange(nameof(UseProxyOnlyForHost_Count));
         }
 
+
         #region Http Proxy List
         public int HttpProxyList_Count
         {
-            get { return Data.ProxyServiceConfigure[ProxyServiceType.HttpProxyList].Proxies?.Count() ?? 0; }
+            get { return Data.ProxyListData.Proxies.Count(); }
         }
         public bool HttpProxyList_IsSelectRandom
         {
-            get { return Data.ProxyServiceConfigure[ProxyServiceType.HttpProxyList].IsSelectRandom; }
-            set { Data.ProxyServiceConfigure[ProxyServiceType.HttpProxyList].IsSelectRandom = value; NotifyPropertyChange(); SaveSetting(); }
+            get { return Data.ProxyListData.IsSelectRandom; }
+            set { Data.ProxyListData.IsSelectRandom = value; NotifyPropertyChange(); SaveSetting(); }
         }
         public bool HttpProxyList_IsDeleteAfterUse
         {
-            get { return Data.ProxyServiceConfigure[ProxyServiceType.HttpProxyList].IsDeleteAfterUse; }
-            set { Data.ProxyServiceConfigure[ProxyServiceType.HttpProxyList].IsDeleteAfterUse = value; NotifyPropertyChange(); SaveSetting(); }
+            get { return Data.ProxyListData.IsDeleteAfterUse; }
+            set { Data.ProxyListData.IsDeleteAfterUse = value; NotifyPropertyChange(); SaveSetting(); }
         }
         public OpenFileDialogCommand LoadHttpProxyListCommand { get; }
         async void _LoadHttpProxyListCommand(string? filePath)
         {
             try
             {
-                Data.ProxyServiceConfigure[ProxyServiceType.HttpProxyList].Proxies = new List<string>();
+                Data.ProxyListData.Proxies.Clear();
                 if (File.Exists(filePath))
                 {
                     IEnumerable<string> lines = await File.ReadAllLinesAsync(filePath);
@@ -134,8 +135,7 @@ namespace $safeprojectname$.UI.ViewModels
                             var split = x.Split(':');
                             return (split.Length == 2 || split.Length == 4) && !split.Any(y => string.IsNullOrWhiteSpace(y));
                         });
-
-                    Data.ProxyServiceConfigure[ProxyServiceType.HttpProxyList].Proxies = lines.ToList();
+                    Data.ProxyListData.Proxies.AddRange(lines.Select(x => ProxyInfo.ParseHttpProxy(x)).Where(x => x is not null)!.Distinct()!);
                 }
             }
             catch (Exception ex)
@@ -154,21 +154,21 @@ namespace $safeprojectname$.UI.ViewModels
         #region TinsoftProxy
         public int TinsoftProxy_KeyCount
         {
-            get { return Data.ProxyServiceConfigure[ProxyServiceType.TinsoftProxy].ApiKeys?.Count() ?? 0; }
+            get { return Data.ProxyApiKeys[ProxyServiceType.TinsoftProxy].Count(); }
         }
         public OpenFileDialogCommand LoadTinsoftProxyKeyCommand { get; }
         async void _LoadTinsoftProxyKeyCommand(string? filePath)
         {
             try
             {
-                Data.ProxyServiceConfigure[ProxyServiceType.TinsoftProxy].ApiKeys = new List<string>();
+                Data.ProxyApiKeys[ProxyServiceType.TinsoftProxy].Clear();
                 if (File.Exists(filePath))
                 {
                     IEnumerable<string> lines = await File.ReadAllLinesAsync(filePath);
                     lines = lines
                         .Where(x => !string.IsNullOrWhiteSpace(x));
 
-                    Data.ProxyServiceConfigure[ProxyServiceType.TinsoftProxy].Proxies = lines.ToList();
+                    Data.ProxyApiKeys[ProxyServiceType.TinsoftProxy].AddRange(lines);
                 }
             }
             catch (Exception ex)
@@ -186,21 +186,21 @@ namespace $safeprojectname$.UI.ViewModels
         #region ProxyNo1
         public int ProxyNo1_KeyCount
         {
-            get { return Data.ProxyServiceConfigure[ProxyServiceType.ProxyNo1].ApiKeys?.Count() ?? 0; }
+            get { return Data.ProxyApiKeys[ProxyServiceType.ProxyNo1].Count(); }
         }
         public OpenFileDialogCommand LoadProxyNo1ProxyKeyCommand { get; }
         async void _LoadProxyNo1ProxyKeyCommand(string? filePath)
         {
             try
             {
-                Data.ProxyServiceConfigure[ProxyServiceType.ProxyNo1].ApiKeys = new List<string>();
+                Data.ProxyApiKeys[ProxyServiceType.ProxyNo1].Clear();
                 if (File.Exists(filePath))
                 {
                     IEnumerable<string> lines = await File.ReadAllLinesAsync(filePath);
                     lines = lines
                         .Where(x => !string.IsNullOrWhiteSpace(x));
 
-                    Data.ProxyServiceConfigure[ProxyServiceType.ProxyNo1].ApiKeys = lines.ToList();
+                    Data.ProxyApiKeys[ProxyServiceType.ProxyNo1].AddRange(lines);
                 }
             }
             catch (Exception ex)
@@ -216,48 +216,37 @@ namespace $safeprojectname$.UI.ViewModels
         #endregion
 
 
-
-
-
         public async IAsyncEnumerable<IProxyApiWrapper> GetProxyApiWrapperAsync()
         {
             var values = Enum.GetValues<ProxyServiceType>().Except(ProxyServiceType.None);
+            await Task.CompletedTask;
             foreach (var value in values.Where(x => Data.ProxyServiceType.HasFlag(x)))
             {
-                DictConfigureData configureData = Data.ProxyServiceConfigure[value];
                 switch (value)
                 {
-                    case ProxyServiceType.HttpProxyList:
+                    case ProxyServiceType.ProxyList:
                         {
-                            yield return new HttpProxyList_ProxyApiWrapper(configureData, SaveAndRefresh);
+                            yield return new ProxyList_ProxyApiWrapper(Data.ProxyListData, SaveAndRefresh);
                         }
                         break;
 
-                    //case ProxyServiceType.TinsoftProxy:
-                    //    {
-                    //        var ApiKeys = configureData.ApiKeys;
-                    //        if (ApiKeys is not null)
-                    //        {
-                    //            foreach (var item in ApiKeys)
-                    //            {
-                    //                yield return new TinsoftProxyApiWrapper(item);
-                    //            }
-                    //        }
-                    //    }
-                    //    break;
+                    case ProxyServiceType.TinsoftProxy:
+                        {
+                            foreach (var item in Data.ProxyApiKeys[ProxyServiceType.TinsoftProxy])
+                            {
+                                yield return new TinsoftProxyApiWrapper(item);
+                            }
+                        }
+                        break;
 
-                    //case ProxyServiceType.ProxyNo1:
-                    //    {
-                    //        var ApiKeys = configureData.ApiKeys;
-                    //        if (ApiKeys is not null)
-                    //        {
-                    //            foreach (var item in ApiKeys)
-                    //            {
-                    //                yield return new ProxyNo1ComApiWrapper(item);
-                    //            }
-                    //        }
-                    //    }
-                    //    break;
+                    case ProxyServiceType.ProxyNo1:
+                        {
+                            foreach (var item in Data.ProxyApiKeys[ProxyServiceType.ProxyNo1])
+                            {
+                                yield return new ProxyNo1ComApiWrapper(item);
+                            }
+                        }
+                        break;
 
                     default:
                         break;

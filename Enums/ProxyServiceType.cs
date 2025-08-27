@@ -6,7 +6,7 @@ namespace $safeprojectname$.Enums
     internal enum ProxyServiceType
     {
         None = 0,
-        HttpProxyList = 1 << 0,
+        ProxyList = 1 << 0,
         TinsoftProxy = 1 << 1,
         ProxyNo1 = 1 << 2,
 

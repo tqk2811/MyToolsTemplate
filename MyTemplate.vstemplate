@@ -21,7 +21,7 @@
       </Folder>
       <Folder Name="AppData" TargetFolderName="AppData" />
       <Folder Name="DataClass" TargetFolderName="DataClass">
-        <ProjectItem ReplaceParameters="true" TargetFileName="DictConfigureData.cs">DictConfigureData.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProxyListData.cs">ProxyListData.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="ProxySettingData.cs">ProxySettingData.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="SettingData.cs">SettingData.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="UiSettingData.cs">UiSettingData.cs</ProjectItem>
@@ -44,7 +44,7 @@
       </Folder>
       <Folder Name="Helpers" TargetFolderName="Helpers"/>
       <Folder Name="Services" TargetFolderName="Services">
-        <ProjectItem ReplaceParameters="true" TargetFileName="HttpProxyList_ProxyApiWrapper.cs">HttpProxyList_ProxyApiWrapper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProxyList_ProxyApiWrapper.cs">ProxyList_ProxyApiWrapper.cs</ProjectItem>
       </Folder>
       <Folder Name="UI" TargetFolderName="UI">
         <Folder Name="ViewModels" TargetFolderName="ViewModels">

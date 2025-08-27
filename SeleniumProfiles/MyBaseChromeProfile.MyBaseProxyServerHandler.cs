@@ -1,14 +1,15 @@
-﻿using System.Threading.Tasks;
-using System.Threading;
-using System;
-using TqkLibrary.Proxy.Authentications;
+﻿using System;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
+using TqkLibrary.Proxy;
+using TqkLibrary.Proxy.Authentications;
 using TqkLibrary.Proxy.Handlers;
 using TqkLibrary.Proxy.Interfaces;
-using TqkLibrary.Proxy.ProxySources;
-using System.Net;
 using TqkLibrary.Proxy.ProxyServers;
-using System.Net.Sockets;
+using TqkLibrary.Proxy.ProxySources;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
@@ -139,9 +140,9 @@ namespace $safeprojectname$.SeleniumProfiles
                 }
             }
 
-            public override IConnectSource GetConnectSource(Guid tunnelId)
+            public override Task<IConnectSource> GetConnectSourceAsync(Guid tunnelId, CancellationToken cancellationToken = default)
             {
-                return new MyConnectTunnel(this, tunnelId);
+                return Task.FromResult<IConnectSource>(new MyConnectTunnel(this, tunnelId));
             }
         }
     }
