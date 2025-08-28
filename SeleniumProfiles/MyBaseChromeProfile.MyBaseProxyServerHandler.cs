@@ -10,6 +10,8 @@ using TqkLibrary.Proxy.Handlers;
 using TqkLibrary.Proxy.Interfaces;
 using TqkLibrary.Proxy.ProxyServers;
 using TqkLibrary.Proxy.ProxySources;
+using TqkLibrary.Net.Proxy.Wrapper.Enums;
+using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
@@ -17,11 +19,11 @@ namespace $safeprojectname$.SeleniumProfiles
     {
         ProxyServer? _proxyServer = null;
         MyBaseProxyServerHandler? _proxyServerHandler = null;
-        protected string WrapperProxy(string? proxy = null)
+        protected string WrapperProxy(IProxyInfo? proxyInfo = null)
         {
             _proxyServerHandler = new MyBaseProxyServerHandler();
             _proxyServer = new ProxyServer(IPEndPoint.Parse("127.0.0.1:0"), _proxyServerHandler);
-            SetProxy(proxy);
+            SetProxy(proxyInfo);
             _proxyServer.StartListen();
             return $"127.0.0.1:{_proxyServer.IPEndPoint!.Port}";
         }
@@ -29,9 +31,9 @@ namespace $safeprojectname$.SeleniumProfiles
         {
             _proxyServer?.ShutdownCurrentConnection();
         }
-        public void SetProxy(string? proxy = null)
+        public void SetProxy(IProxyInfo? proxyInfo = null)
         {
-            _proxyServerHandler?.SetProxy(proxy);
+            _proxyServerHandler?.SetProxy(proxyInfo);
             if (Setting.ProxySettingData.IsShutdownCurrentConnection)
                 _proxyServer?.ShutdownCurrentConnection();
         }
@@ -46,23 +48,45 @@ namespace $safeprojectname$.SeleniumProfiles
         {
             IProxySource defaultProxySource = new MyLocalProxySource();
             IProxySource? _currentProxySource = null;
-            public void SetProxy(string? proxy)
+            public void SetProxy(IProxyInfo? proxyInfo = null)
             {
-                if (string.IsNullOrWhiteSpace(proxy))
+                if (proxyInfo is null)
                 {
                     _currentProxySource = null;
                 }
                 else
                 {
-                    string[] split = proxy.Split(':', '|').Select(x => x.Trim()).ToArray();
-                    switch (split.Length)
+                    switch (proxyInfo.ProxyType)
                     {
-                        case 2:
-                            _currentProxySource = new HttpProxySource(new Uri($"http://{split[0]}:{split[1]}"));
+                        case ProxyType.Http:
+                            Uri uri;
+                            if (string.IsNullOrWhiteSpace(proxyInfo.UserName) || string.IsNullOrWhiteSpace(proxyInfo.Password))
+                            {
+                                uri = new Uri($"http://{proxyInfo.Address}:{proxyInfo.Port}");
+                            }
+                            else
+                            {
+                                uri = new Uri($"http://{proxyInfo.UserName}:{proxyInfo.Password}@{proxyInfo.Address}:{proxyInfo.Port}");
+                            }
+                            _currentProxySource = new HttpProxySource(uri);
                             break;
 
-                        case 4:
-                            _currentProxySource = new HttpProxySource(new Uri($"http://{split[0]}:{split[1]}"), new HttpProxyAuthentication(split[2], split[3]));
+                        case ProxyType.Socks4:
+                            _currentProxySource = new Socks4ProxySource(new IPEndPoint(IPAddress.Parse(proxyInfo.Address), proxyInfo.Port));
+                            break;
+
+                        case ProxyType.Socks5:
+                            if (string.IsNullOrWhiteSpace(proxyInfo.UserName) || string.IsNullOrWhiteSpace(proxyInfo.Password))
+                            {
+                                _currentProxySource = new Socks5ProxySource(new IPEndPoint(IPAddress.Parse(proxyInfo.Address), proxyInfo.Port));
+                            }
+                            else
+                            {
+                                _currentProxySource = new Socks5ProxySource(
+                                    new IPEndPoint(IPAddress.Parse(proxyInfo.Address), proxyInfo.Port),
+                                    new HttpProxyAuthentication(proxyInfo.UserName, proxyInfo.Password)
+                                    );
+                            }
                             break;
                     }
                 }

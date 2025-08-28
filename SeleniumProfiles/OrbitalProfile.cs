@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
+using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
@@ -28,7 +29,7 @@ namespace $safeprojectname$.SeleniumProfiles
                 throw new InvalidOperationException($"Hãy cài gologin để sử dụng Orbital Browser");
         }
 
-        public override async Task OpenChromeAsync(string? proxy = null, CancellationToken cancellationToken = default)
+        public override async Task OpenChromeAsync(IProxyInfo? proxyInfo = null, CancellationToken cancellationToken = default)
         {
             if (IsOpenChrome)
                 return;

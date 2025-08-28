@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Chrome;
 using TqkLibrary.SeleniumSupport;
+using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
@@ -14,7 +15,7 @@ namespace $safeprojectname$.SeleniumProfiles
         {
         }
 
-        public override async Task OpenChromeAsync(string? proxy = null, CancellationToken cancellationToken = default)
+        public override async Task OpenChromeAsync(IProxyInfo? proxyInfo = null, CancellationToken cancellationToken = default)
         {
             if (IsOpenChrome)
                 return;

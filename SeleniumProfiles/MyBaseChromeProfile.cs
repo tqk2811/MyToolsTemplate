@@ -19,6 +19,7 @@ using System.Text;
 using System.Windows.Markup;
 using TqkLibrary.WinApi.FindWindowHelper;
 using TqkLibrary.WinApi.WmiHelpers;
+using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
 using $safeprojectname$.DataClass;
 using TqkLibrary.WinApi.Helpers;
 using $safeprojectname$.UI.ViewModels;
@@ -188,7 +189,7 @@ function Base64UriToBlob(dataURI) {
         }
 
 
-        public abstract Task OpenChromeAsync(string? proxy = null, CancellationToken cancellationToken = default);
+        public abstract Task OpenChromeAsync(IProxyInfo? proxyInfo = null, CancellationToken cancellationToken = default);
         public override Task CloseChromeAsync(CancellationToken cancellationToken = default)
         {
             try
