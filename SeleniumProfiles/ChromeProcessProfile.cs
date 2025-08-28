@@ -16,17 +16,18 @@ using TqkLibrary.Proxy.ProxyServers;
 using TqkLibrary.Proxy.ProxySources;
 using TqkLibrary.SeleniumSupport;
 using TqkLibrary.SeleniumSupport.Interfaces;
+using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
-    internal class ChromeProcessProfile<TProfileData> : MyBaseChromeProfile<TProfileData>
+    internal class ChromeProcessProfile : MyBaseChromeProfile
     {
-        public ChromeProcessProfile(TProfileData profileData) : base(profileData)
+        public ChromeProcessProfile(string profileName) : base(profileName)
         {
         }
 
 
-        public override async Task OpenChromeAsync(string? proxy = null, CancellationToken cancellationToken = default)
+        public override async Task OpenChromeAsync(IProxyInfo? proxyInfo = null, CancellationToken cancellationToken = default)
         {
             if (IsOpenChrome)
                 return;
@@ -42,7 +43,7 @@ namespace $safeprojectname$.SeleniumProfiles
             }
 
 
-            string wrapperProxy = WrapperProxy(proxy);
+            string wrapperProxy = WrapperProxy(proxyInfo);
             arguments.Add($"--proxy-server=http://{wrapperProxy}");
 
 
