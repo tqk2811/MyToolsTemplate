@@ -15,11 +15,11 @@ using System;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
-    internal class OrbitalProfile<TProfileData> : MyBaseChromeProfile<TProfileData>
+    internal class OrbitalProfile : MyBaseChromeProfile
     {
         public string ChromeDir { get; }
         public string ChromePath { get; }
-        internal OrbitalProfile(TProfileData profileData) : base(profileData)
+        internal OrbitalProfile(string profileName) : base(profileName)
         {
             string gologinPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".gologin");
             ChromeDir = Directory.GetDirectories(Path.Combine(gologinPath, "browser"), "orbita-browser*").Last();
@@ -128,7 +128,7 @@ namespace $safeprojectname$.SeleniumProfiles
                 json.gologin.get_client_rects_noise = json.gologin.getClientRectsNoice;
             }
 
-            json.gologin.name = Name;
+            json.gologin.name = ProfileName;
 
             json.gologin.screenHeight = configure.Height;
             json.gologin.screenWidth = configure.Width;
@@ -174,15 +174,15 @@ namespace $safeprojectname$.SeleniumProfiles
         class ControlChromeProcess : IControlChromeProcess
         {
             readonly string[] _arguments;
-            readonly OrbitalProfile<TProfileData> _orbitalProfile;
+            readonly OrbitalProfile _orbitalProfile;
             Process? _process = null;
             int _port = 0;
             public int? ProcessId => _process?.Id;
 
-            public ControlChromeProcess(OrbitalProfile<TProfileData> orbitalProfile, params string[] arguments) : this(orbitalProfile, arguments.AsEnumerable())
+            public ControlChromeProcess(OrbitalProfile orbitalProfile, params string[] arguments) : this(orbitalProfile, arguments.AsEnumerable())
             {
             }
-            public ControlChromeProcess(OrbitalProfile<TProfileData> orbitalProfile, IEnumerable<string> arguments)
+            public ControlChromeProcess(OrbitalProfile orbitalProfile, IEnumerable<string> arguments)
             {
                 this._orbitalProfile = orbitalProfile ?? throw new ArgumentNullException(nameof(orbitalProfile));
                 _arguments = arguments?.Where(x => !string.IsNullOrWhiteSpace(x))?.ToArray() ?? new string[] { };

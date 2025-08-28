@@ -8,9 +8,9 @@ using TqkLibrary.SeleniumSupport;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
-    internal class ChromeProfile<TProfileData> : MyBaseChromeProfile<TProfileData>
+    internal class ChromeProfile : MyBaseChromeProfile
     {
-        public ChromeProfile(TProfileData profileData) : base(profileData)
+        public ChromeProfile(string profileName) : base(profileName)
         {
         }
 
