@@ -25,7 +25,7 @@ using $safeprojectname$.UI.ViewModels;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
-    internal abstract partial class MyBaseChromeProfile<TProfileData> : BaseChromeProfile
+    internal abstract partial class MyBaseChromeProfile : BaseChromeProfile
     {
         static SettingData Setting { get { return Singleton.Setting.Data; } }
         static protected readonly IReadOnlyList<string> _chromeArguments = new List<string>()
@@ -69,17 +69,14 @@ namespace $safeprojectname$.SeleniumProfiles
 
         protected static readonly AsyncLock _asyncLock = new AsyncLock();
         
-        internal TProfileData ProfileData { get; }
         public ILogger Logger { get; }
         public string UserDataDir { get; }
-        public string Name { get; }
+        public string ProfileName { get; }
 
-        internal MyBaseChromeProfile(TProfileData profileData)
+        internal MyBaseChromeProfile(string profileName)
         {
-            this.ProfileData = profileData ?? throw new ArgumentNullException(nameof(profileData));
-            string profileName = profileData.ToString();
-            Logger = Singleton.ILoggerFactory.CreateLogger(profileName);
-            Name = profileName;
+            Logger = Singleton.ILoggerFactory.CreateLogger($"{this.GetType().Name}({profileName})");
+            ProfileName = profileName;
             UserDataDir = Path.Combine(Singleton.UserDataDirs, profileName);
         }
 

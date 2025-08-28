@@ -13,7 +13,7 @@ using TqkLibrary.Proxy.ProxySources;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
-    internal abstract partial class MyBaseChromeProfile<TProfileData>
+    internal abstract partial class MyBaseChromeProfile
     {
         ProxyServer? _proxyServer = null;
         MyBaseProxyServerHandler? _proxyServerHandler = null;

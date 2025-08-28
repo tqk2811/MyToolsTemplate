@@ -30,6 +30,9 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="Preferences.json">Preferences.json</ProjectItem>
       </Folder>
       <Folder Name="SeleniumProfiles" TargetFolderName="SeleniumProfiles">
+          <Folder Name="ProfileWorkers" TargetFolderName="ProfileWorkers">
+            <ProjectItem ReplaceParameters="true" TargetFileName="BaseProfileWorker.cs">BaseProfileWorker.cs</ProjectItem>
+          </Folder>
         <ProjectItem ReplaceParameters="true" TargetFileName="ChromeProcessProfile.cs">ChromeProcessProfile.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="ChromeProfile.cs">ChromeProfile.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="MyBaseChromeProfile.cs">MyBaseChromeProfile.cs</ProjectItem>
