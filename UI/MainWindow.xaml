@@ -17,7 +17,9 @@
         Title="{Binding WindowTitle}"
         WindowStartupLocation="CenterScreen"
         Height="450"
-        Width="1100">
+        Width="1100"
+        Loaded="Window_Loaded"
+        >
     <Window.DataContext>
         <WindowViewModels:MainWVM/>
     </Window.DataContext>
