@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using Microsoft.Extensions.Logging;
 using TqkLibrary.WinApi.FindWindowHelper;
 using TqkLibrary.WinApi.WmiHelpers;
+using System.Diagnostics;
+using AutoOrderBathandbodyworksCom.SeleniumProfiles;
 using $safeprojectname$.UI.ViewModels;
 using $safeprojectname$.UI.ViewModels.WindowViewModels;
 

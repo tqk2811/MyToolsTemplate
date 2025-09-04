@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TqkLibrary.Net.Proxy.Wrapper.Implements;
+using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
 using TqkLibrary.Net.Proxy.Wrapper;
 using $safeprojectname$.DataClass;
 using System.IO;

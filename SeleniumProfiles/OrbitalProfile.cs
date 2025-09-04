@@ -48,7 +48,7 @@ namespace $safeprojectname$.SeleniumProfiles
             }
 
 
-            string wrapperProxy = WrapperProxy(proxy);
+            string wrapperProxy = WrapperProxy(proxyInfo);
             arguments.Add($"--proxy-server=http://{wrapperProxy}");
 
             string chromeDriverDir = await DownloadChromeDriverAsync(ChromePath, cancellationToken);
