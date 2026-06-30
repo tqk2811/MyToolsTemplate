@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Chrome;
 using TqkLibrary.SeleniumSupport;
-using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
+using TqkLibrary.Http.Api.Proxy.Wrapper.Interfaces;
 
 namespace $safeprojectname$.SeleniumProfiles
 {

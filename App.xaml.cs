@@ -8,7 +8,7 @@ using System.Windows;
 using System.Globalization;
 using TqkLibrary.WpfUi;
 using System.CommandLine;
-using TqkLibrary.WinApi.FindWindowHelper;
+using TqkLibrary.WinApi.Helpers;
 using System.Diagnostics;
 using $safeprojectname$.UI;
 

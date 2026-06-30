@@ -10,8 +10,8 @@ using TqkLibrary.Proxy.Handlers;
 using TqkLibrary.Proxy.Interfaces;
 using TqkLibrary.Proxy.ProxyServers;
 using TqkLibrary.Proxy.ProxySources;
-using TqkLibrary.Net.Proxy.Wrapper.Enums;
-using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
+using TqkLibrary.Http.Api.Proxy.Wrapper.Enums;
+using TqkLibrary.Http.Api.Proxy.Wrapper.Interfaces;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
@@ -84,7 +84,7 @@ namespace $safeprojectname$.SeleniumProfiles
                             {
                                 _currentProxySource = new Socks5ProxySource(
                                     new IPEndPoint(IPAddress.Parse(proxyInfo.Address), proxyInfo.Port),
-                                    new HttpProxyAuthentication(proxyInfo.UserName, proxyInfo.Password)
+                                    new ProxyCredential(proxyInfo.UserName, proxyInfo.Password)
                                     );
                             }
                             break;

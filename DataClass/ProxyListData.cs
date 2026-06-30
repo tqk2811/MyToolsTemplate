@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using TqkLibrary.Net.Proxy.Wrapper;
+using TqkLibrary.Http.Api.Proxy.Wrapper;
 namespace $safeprojectname$.DataClass
 {
     public class ProxyListData

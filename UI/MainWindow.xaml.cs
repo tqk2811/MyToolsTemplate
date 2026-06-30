@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Extensions.Logging;
-using TqkLibrary.WinApi.FindWindowHelper;
+using TqkLibrary.WinApi.Helpers;
 using TqkLibrary.WinApi.WmiHelpers;
 using System.Diagnostics;
 using $safeprojectname$.SeleniumProfiles;

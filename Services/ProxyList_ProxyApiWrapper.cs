@@ -2,8 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using TqkLibrary.Linq;
-using TqkLibrary.Net.Proxy.Wrapper;
-using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
+using TqkLibrary.Http.Api.Proxy.Wrapper;
+using TqkLibrary.Http.Api.Proxy.Wrapper.Interfaces;
 using $safeprojectname$.DataClass;
 using $safeprojectname$.Exceptions;
 

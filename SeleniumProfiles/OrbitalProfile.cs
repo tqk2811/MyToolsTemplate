@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
-using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
+using TqkLibrary.Http.Api.Proxy.Wrapper.Interfaces;
 
 namespace $safeprojectname$.SeleniumProfiles
 {

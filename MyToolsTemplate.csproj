@@ -24,23 +24,23 @@
 	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
 		<PackageReference Include="Microsoft-WindowsAPICodePack-Shell-6.0" Version="1.1.6" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-		<PackageReference Include="System.CommandLine" Version="2.0.0-beta6.25358.103" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.8" />
+		<PackageReference Include="System.CommandLine" Version="2.0.9" />
 		<!-- <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference> -->
 		<!-- <PackageReference Include="SpicyTaco.AutoGrid" Version="1.2.29" /> -->
 		<PackageReference Include="TqkLibrary.AutoGrid" Version="1.2.29" />
-		<PackageReference Include="TqkLibrary.Data.Excel" Version="1.0.0-build20250610162440" />
-		<PackageReference Include="TqkLibrary.Linq" Version="1.0.0-build20250609153210" />
-		<PackageReference Include="TqkLibrary.Net.Proxy" Version="1.0.2-build20250827160841" />
-		<PackageReference Include="TqkLibrary.Proxy" Version="1.0.0" />
-		<PackageReference Include="TqkLibrary.Queues" Version="1.0.0-build20250820145436" />
-		<PackageReference Include="TqkLibrary.SeleniumSupport" Version="1.0.0-build20250621145553" />
-		<PackageReference Include="TqkLibrary.Utils" Version="1.0.0-build20250602165009" />
-		<PackageReference Include="TqkLibrary.WinApi" Version="1.0.0-build20250616161206" />
-		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.0-build20250823153651" />
+		<PackageReference Include="TqkLibrary.Concurrency" Version="1.0.1" />
+		<PackageReference Include="TqkLibrary.Data.Excel" Version="1.0.0" />
+		<PackageReference Include="TqkLibrary.Http.Api.Proxy" Version="1.1.21" />
+		<PackageReference Include="TqkLibrary.Linq" Version="1.0.0" />
+		<PackageReference Include="TqkLibrary.Proxy" Version="1.0.35" />
+		<PackageReference Include="TqkLibrary.SeleniumSupport" Version="1.0.9" />
+		<PackageReference Include="TqkLibrary.Utils" Version="1.0.0" />
+		<PackageReference Include="TqkLibrary.WinApi" Version="1.0.5" />
+		<PackageReference Include="TqkLibrary.WpfUi" Version="1.0.1" />
 	</ItemGroup>
 
 

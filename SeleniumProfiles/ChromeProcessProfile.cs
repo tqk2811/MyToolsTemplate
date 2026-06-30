@@ -16,7 +16,7 @@ using TqkLibrary.Proxy.ProxyServers;
 using TqkLibrary.Proxy.ProxySources;
 using TqkLibrary.SeleniumSupport;
 using TqkLibrary.SeleniumSupport.Interfaces;
-using TqkLibrary.Net.Proxy.Wrapper.Interfaces;
+using TqkLibrary.Http.Api.Proxy.Wrapper.Interfaces;
 
 namespace $safeprojectname$.SeleniumProfiles
 {
